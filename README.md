@@ -25,4 +25,4 @@ Built with HTML, CSS, and React, it’s fully responsive and optimized for both 
 If you’d like to connect, reach me at:
 📧 elodieyeung.2024@computing.smu.edu.sg
 
-[🔗 LinkedIn] (www.linkedin.com/in/elodieyyx)
+🔗 LinkedIn (www.linkedin.com/in/elodieyyx)
