@@ -1,62 +1,198 @@
 /* Banner */
 .banner {
   margin-top: 0;
-  padding: 40px 0 100px;
+  padding: 100px 0 100px;
   position: relative;
+  overflow: hidden;
+  background-color: #fcfcf7;
+  /* Off-white background from reference */
 }
 
-.banner .tagline {
+/* Polaroid Section */
+.polaroid-wrapper {
+  position: relative;
   display: inline-block;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  padding: 8px 10px;
-  background: linear-gradient(90deg, rgba(170,54,124,0.5) 0%, rgba(74,47,189,0.5) 100%);
-  border: 1px solid rgba(255,255,255,0.5);
-  font-size: 20px;
-  margin-bottom: 16px;
+  padding: 20px;
 }
-.banner h1 {
-  font-size: 65px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
+
+.polaroid-frame {
+  background: white;
+  padding: 15px 15px 50px 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transform: rotate(-3deg);
+  position: relative;
+  transition: transform 0.3s ease;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.polaroid-frame:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.polaroid-frame img {
+  width: 100%;
+  height: 300px;
+  /* Reduced fixed height to fix "too long" look */
+  object-fit: cover;
+  /* Cover to maintain aspect ratio while cropping */
+  object-position: center 20%;
+  /* Focus on top-center */
+  border: 1px solid #eee;
+}
+
+.paperclip-icon {
+  position: absolute;
+  top: -15px;
+  right: 20px;
+  color: #999;
+  transform: rotate(15deg);
+  z-index: 10;
+}
+
+/* Pink Sticker - Removed */
+
+/* Right Content */
+.content-wrapper {
+  text-align: left;
+  font-family: 'Helvetica Neue', sans-serif;
+  /* Clean sans-serif */
+  padding-left: 50px;
+  /* Move text slightly right */
+}
+
+.hello-title {
+  font-size: 100px;
+  font-weight: 800;
   line-height: 1;
-  margin-bottom: 20px;
+  letter-spacing: -2px;
+  margin-bottom: 5px;
+  background: linear-gradient(180deg, #538bff 0%, #a2c4ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Fallback or shadow to give it depth if text-fill-color not supported well, 
+     but adding a blur shadow to simulate the glowing/soft look */
+  filter: drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.1));
+  font-style: italic;
 }
-.banner p {
+
+.subtitle {
+  font-size: 14px;
   color: #949386;
-  font-size: 18px;
-  letter-spacing: 0.8px;
-  line-height: 1.5;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  margin-left: 10px;
 }
-.banner button {
+
+/* Info Grid */
+.info-grid {
   display: flex;
-  align-items: center;
-  font-size: 20px;
-  font-weight: 700;
-  color: #FFF;
-  margin-top: 60px;
-  letter-spacing: 0.8px;
-  transition: all 0.3s;
-}
-.banner button svg { margin-left: 10px; transition: margin 0.3s; }
-.banner button:hover svg { margin-left: 25px; }
-.banner img { animation: updown 3s linear infinite; }
-
-/* Fade-in state */
-.banner .hero-text,
-.banner .hero-img {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-.banner.loaded .hero-text { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
-.banner.loaded .hero-img { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
-
-@keyframes updown {
-  0%   { transform: translateY(-20px); }
-  50%  { transform: translateY(20px); }
-  100% { transform: translateY(-20px); }
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* Text Rotate Cursor */
-.txt-rotate > .wrap { border-right: 0.08em solid #666; }
+.info-row {
+  display: flex;
+  align-items: baseline;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.info-row .label {
+  font-weight: 800;
+  font-size: 14px;
+  min-width: 100px;
+  text-align: right;
+  margin-right: 20px;
+  color: #949386;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-row .value {
+  color: #949386;
+  font-weight: 400;
+}
+
+.highlight-red {
+  color: #dc3545;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .banner {
+    padding: 30px 0 10px;
+    /* Reduced vertical padding */
+  }
+
+  .hello-title {
+    font-size: 42px;
+    line-height: 0.9;
+    margin-left: -5px;
+  }
+
+  .subtitle {
+    font-size: 10px;
+    margin-bottom: 15px;
+    color: #949386;
+  }
+
+  .content-wrapper {
+    margin-top: 0;
+    padding-left: 5px;
+    /* Small padding from image */
+    text-align: left;
+    /* Reset to left align for side-by-side */
+  }
+
+  .info-row {
+    font-size: 10px;
+    /* Tiny font for details */
+    margin-bottom: 5px;
+    justify-content: flex-start;
+    /* Align left */
+  }
+
+  .info-row .label {
+    text-align: right;
+    min-width: 45px;
+    /* Shrink label width */
+    margin-right: 8px;
+    color: #949386;
+  }
+
+  .info-row .value {
+    color: #949386;
+  }
+
+  .polaroid-frame {
+    max-width: 100%;
+    /* Let it fill the small column */
+    padding: 5px 5px 20px 5px;
+    transform: rotate(-2deg);
+    /* Reduce rotation slightly */
+  }
+
+  .polaroid-frame:hover {
+    transform: none;
+    /* Disable hover effect on touch */
+  }
+
+  .polaroid-frame img {
+    height: auto;
+    max-height: 180px;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .paperclip-icon {
+    top: -10px;
+    right: 5px;
+    width: 20px;
+  }
+}

@@ -1,40 +1,58 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import headerImg from "../../assets/img/header-img.svg";
+import { Paperclip } from "react-bootstrap-icons";
+import polaroidImg from "../../assets/img/photo_2025-12-08_22-31-35.jpg";
 import "./Banner.css";
 
 export default function Banner() {
     const [isLoaded, setIsLoaded] = useState(false);
 
-    // trigger the loaded class as soon as we mount
     useEffect(() => {
         setIsLoaded(true);
     }, []);
 
     return (
-        <section
-            className={`banner${isLoaded ? " loaded" : ""}`}
-            id="home"
-        >
+        <section className={`banner${isLoaded ? " loaded" : ""}`} id="home">
             <Container>
-                <Row className="align-items-center">
-                    <Col xs={12} md={6} xl={7}>
-                        <h1 className="hero-text">
-                            hello!
-                        </h1>
-                        <p
-                            className="hero-text"
-                            style={{ transitionDelay: "0.3s" }}
-                        >
-                            welcome :D
-                        </p>
+                <Row className="align-items-center justify-content-center">
+                    {/* Left Column: Polaroid Image */}
+                    <Col xs={5} md={5} xl={4} className="mb-0 mb-md-0">
+                        <div className="polaroid-wrapper">
+                            <div className="polaroid-frame">
+                                <img src={polaroidImg} alt="Polaroid of me" className="img-fluid" />
+                                <Paperclip className="paperclip-icon" size={40} />
+                            </div>
+                        </div>
                     </Col>
-                    <Col xs={12} md={6} xl={5}>
-                        <img
-                            src={headerImg}
-                            alt="Header Img"
-                            className="hero-img"
-                        />
+
+                    {/* Right Column: Text Content */}
+                    <Col xs={7} md={7} xl={6}>
+                        <div className="content-wrapper ps-md-5">
+                            <h1 className="hello-title">hello!</h1>
+                            <p className="subtitle">Woo! I'm a bullet points!</p>
+
+                            <div className="info-grid">
+                                <div className="info-row">
+                                    <span className="label">NAME:</span>
+                                    <span className="value">Jane Doe</span>
+                                </div>
+                                <div className="info-row">
+                                    <span className="label">AGE:</span>
+                                    <span className="value">15</span>
+                                </div>
+                                <div className="info-row align-items-start">
+                                    <span className="label">CURRENTLY:</span>
+                                    <span className="value">
+                                        Romanticizing<br />
+                                        student life <span className="highlight-red">(and<br />mildly spiraling)</span>
+                                    </span>
+                                </div>
+                                <div className="info-row">
+                                    <span className="label">LIFE GOAL:</span>
+                                    <span className="value">Be iconic...</span>
+                                </div>
+                            </div>
+                        </div>
                     </Col>
                 </Row>
             </Container>
