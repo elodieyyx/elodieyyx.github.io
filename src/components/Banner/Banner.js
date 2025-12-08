@@ -6,9 +6,16 @@ import "./Banner.css";
 
 export default function Banner() {
     const [isLoaded, setIsLoaded] = useState(false);
+    const [helloSlideIn, setHelloSlideIn] = useState(false);
 
     useEffect(() => {
-        setIsLoaded(true);
+        // Start banner animations shortly after component mounts (loading screen already finished)
+        const timer = setTimeout(() => {
+            setIsLoaded(true);
+            setHelloSlideIn(true);
+        }, 0); // Small delay to ensure smooth transition
+
+        return () => clearTimeout(timer);
     }, []);
 
     return (
@@ -28,7 +35,7 @@ export default function Banner() {
                     {/* Right Column: Text Content */}
                     <Col xs={7} md={7} xl={6}>
                         <div className="content-wrapper ps-md-5">
-                            <h1 className="hello-title">hello!</h1>
+                            <h1 className={`hello-title ${helloSlideIn ? "slide-in" : ""}`}>hello!</h1>
 
                             <div className="info-grid">
                                 <div className="info-row">
@@ -57,4 +64,4 @@ export default function Banner() {
             </Container>
         </section>
     );
-};
+}

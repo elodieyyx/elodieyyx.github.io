@@ -5,6 +5,12 @@
   justify-content: center;
   min-height: 90vh;
   background-color: inherit; /* Matches the rest of the page */
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.banner.loaded {
+  opacity: 1;
 }
 
 /* Polaroid Section */
@@ -72,6 +78,14 @@
      but adding a blur shadow to simulate the glowing/soft look */
   filter: drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.1));
   font-style: italic;
+  opacity: 0;
+  transform: translateX(100vw);
+  transition: opacity 0.3s ease-out, transform 0.8s ease-out;
+}
+
+.hello-title.slide-in {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .subtitle {
@@ -196,24 +210,22 @@
 
 /* Animation */
 /* Initial state */
-.polaroid-frame,
-.hello-title {
+.polaroid-frame {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
+.banner.loaded .hello-title {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.5s;
+}
 /* Loaded state */
 .banner.loaded .polaroid-frame {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.3s;
-}
-
-.banner.loaded .hello-title {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.5s;
 }
 
 /* Initial state for info grid */

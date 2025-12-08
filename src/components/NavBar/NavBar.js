@@ -43,7 +43,7 @@ export const NavBar = () => {
     };
 
     // Check if we're on the home page
-    const isHomePage = location.pathname === '/';
+    const isHomePage = location.pathname === '/home' || location.pathname === '/';
 
     return (
         <>
