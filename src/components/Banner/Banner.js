@@ -29,27 +29,26 @@ export default function Banner() {
                     <Col xs={7} md={7} xl={6}>
                         <div className="content-wrapper ps-md-5">
                             <h1 className="hello-title">hello!</h1>
-                            <p className="subtitle">Woo! I'm a bullet points!</p>
 
                             <div className="info-grid">
                                 <div className="info-row">
                                     <span className="label">NAME:</span>
-                                    <span className="value">Jane Doe</span>
+                                    <span className="value">Elodie Yeung</span>
                                 </div>
                                 <div className="info-row">
                                     <span className="label">AGE:</span>
-                                    <span className="value">15</span>
+                                    <span className="value">20</span>
                                 </div>
                                 <div className="info-row align-items-start">
                                     <span className="label">CURRENTLY:</span>
                                     <span className="value">
-                                        Romanticizing<br />
-                                        student life <span className="highlight-red">(and<br />mildly spiraling)</span>
+                                        Learning as much as I can!<br />
+                                        <span className="highlight-red">(and mildly spiraling)</span>
                                     </span>
                                 </div>
                                 <div className="info-row">
                                     <span className="label">LIFE GOAL:</span>
-                                    <span className="value">Be iconic...</span>
+                                    <span className="value">Build fun projects that I can be proud of!</span>
                                 </div>
                             </div>
                         </div>
