@@ -5,6 +5,9 @@
 
 .projects-section h4 {
   font-family: 'Centra', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #949366;
 }
 
 /* Skills Capsules in Projects */
@@ -28,7 +31,7 @@
 
 .projects-section p {
   color: #949386;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   line-height: 1.6;
   margin-bottom: 1rem;
   font-family: 'Centra', sans-serif;
@@ -90,4 +93,47 @@
 .capsule:hover {
   transform: translateY(-2px);
   background-color: #9aad8a;
+}
+
+/* Responsive text sizing */
+@media (min-width: 1920px) {
+  .projects-section p {
+    font-size: 1.375rem;
+  }
+  
+  .projects-section .capsule {
+    font-size: 1rem;
+  }
+  
+  .projects-section h4 {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+  .projects-section p {
+    font-size: 1.125rem;
+  }
+  
+  .projects-section .capsule {
+    font-size: 0.9rem;
+  }
+  
+  .projects-section h4 {
+    font-size: 1.375rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-section p {
+    font-size: 1rem;
+  }
+  
+  .projects-section .capsule {
+    font-size: 0.8rem;
+  }
+  
+  .projects-section h4 {
+    font-size: 1.25rem;
+  }
 }
