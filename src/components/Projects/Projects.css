@@ -1,3 +1,12 @@
+/* Projects Section */
+.projects-section {
+  font-family: 'Centra', sans-serif;
+}
+
+.projects-section h4 {
+  font-family: 'Centra', sans-serif;
+}
+
 /* Skills Capsules in Projects */
 .projects-section .skills {
   display: flex;
@@ -14,6 +23,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   display: inline-block;
+  font-family: 'Centra', sans-serif;
 }
 
 .projects-section p {
@@ -21,6 +31,8 @@
   font-size: 1.125rem;
   line-height: 1.6;
   margin-bottom: 1rem;
+  font-family: 'Centra', sans-serif;
+  font-weight: 400;
 }
 
 .demo-btn {
@@ -36,6 +48,7 @@
   text-decoration: none;
   letter-spacing: 0.8px;
   transition: background-color 0.3s, color 0.3s;
+  font-family: 'Centra', sans-serif;
 }
 
 .demo-btn:hover {
@@ -71,6 +84,7 @@
   letter-spacing: 1px;
   min-width: 85px;
   position: relative;
+  font-family: 'Centra', sans-serif;
 }
 
 .capsule:hover {

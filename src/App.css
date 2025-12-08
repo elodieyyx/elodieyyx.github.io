@@ -67,12 +67,15 @@ p.danger  { color: #FDFD96; }
   display: block;
   position: static;    /* undo any absolute positioning */
   margin-bottom: 1rem; /* give breathing room under the title */
+  font-family: 'Centra', sans-serif;
 }
 
 .section-text {
   font-size: 1.125rem;
   line-height: 1.6;
   color: #949386;
+  font-family: 'Centra', sans-serif;
+  font-weight: 400;
 }
 
 /* Paragraph / bio text */

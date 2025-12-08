@@ -58,8 +58,8 @@
 /* Right Content */
 .content-wrapper {
   text-align: left;
-  font-family: 'Helvetica Neue', sans-serif;
-  /* Clean sans-serif */
+  font-family: 'Centra', sans-serif;
+  /* Match About Me section font */
   padding-left: 50px;
   /* Move text slightly right */
 }
@@ -110,6 +110,7 @@
   align-items: baseline;
   font-size: 24px;
   line-height: 1.2;
+  font-family: 'Centra', sans-serif;
 }
 
 .info-row .label {
@@ -124,8 +125,18 @@
 }
 
 .info-row .value {
+  /* Match .section-text exactly */
+  font-size: 1.125rem;
+  line-height: 1.6;
   color: #949386;
   font-weight: 400;
+  font-family: 'Centra', sans-serif;
+  letter-spacing: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Reset any inherited properties */
+  text-transform: none;
+  font-style: normal;
 }
 
 .highlight-red {
