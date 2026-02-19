@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './Captcha.css';
+
+const IMAGE_CATEGORIES = {
+  cars: [1, 2, 3, 4], // indices of car images
+  trees: [5, 6, 7, 8], // indices of tree images
+  buildings: [9, 10, 11, 12], // indices of building images
+};
 
 export const Captcha = ({ onSuccess }) => {
   const [images, setImages] = useState([]);
@@ -7,23 +13,16 @@ export const Captcha = ({ onSuccess }) => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [isCorrect, setIsCorrect] = useState(null);
 
-  // Sample image data - you'll replace these with actual images
-  const imageCategories = {
-    cars: [1, 2, 3, 4], // indices of car images
-    trees: [5, 6, 7, 8], // indices of tree images
-    buildings: [9, 10, 11, 12] // indices of building images
-  };
-
-  const generateCaptcha = () => {
-    const categories = Object.keys(imageCategories);
+  const generateCaptcha = useCallback(() => {
+    const categories = Object.keys(IMAGE_CATEGORIES);
     const randomCategory = categories[Math.floor(Math.random() * categories.length)];
     
     // Create a grid of 9 images with some correct and some incorrect
-    const correctIndices = imageCategories[randomCategory].slice(0, 3);
+    const correctIndices = IMAGE_CATEGORIES[randomCategory].slice(0, 3);
     const otherCategories = categories.filter(c => c !== randomCategory);
     const incorrectIndices = [
-      ...imageCategories[otherCategories[0]].slice(0, 3),
-      ...imageCategories[otherCategories[1]].slice(0, 3)
+      ...IMAGE_CATEGORIES[otherCategories[0]].slice(0, 3),
+      ...IMAGE_CATEGORIES[otherCategories[1]].slice(0, 3)
     ];
     
     const allImages = [...correctIndices, ...incorrectIndices]
@@ -39,11 +38,11 @@ export const Captcha = ({ onSuccess }) => {
     setTargetCategory(randomCategory);
     setSelectedImages([]);
     setIsCorrect(null);
-  };
+  }, []);
 
   useEffect(() => {
     generateCaptcha();
-  }, []);
+  }, [generateCaptcha]);
 
   const toggleImageSelection = (imageId) => {
     setSelectedImages(prev => 

@@ -1,143 +1,165 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ImageCarousel from './ImageCarousel';
 import "./Projects.css";
 
-export default function Projects() {
-  // Image arrays for projects with multiple screenshots
-  const project1Images = [
-    '/img/project1-1.jpg',
-    '/img/project1-2.jpg',
-    '/img/project1-3.jpg',
-    '/img/project1-4.jpg',
-    '/img/project1-5.jpg'
-  ];
-  
-  const project3Images = [
-    '/img/project3-1.jpg',
-    '/img/project3-2.jpg',
-    '/img/project3-3.jpg'
-  ];
+const PROJECTS = [
+  {
+    id: '01',
+    title: 'NASA Space Apps Challenge',
+    subtitle: 'AirQ — location-based air quality monitoring',
+    description: 'Integrates NASA\'s TEMPO satellite data with ground measurements and weather information. Users can select their location to view real-time pollution levels and track air quality trends.',
+    year: '2025',
+    images: [
+      '/img/project4-1.jpg',
+      '/img/project4-2.jpg',
+      '/img/project4-3.jpg',
+    ],
+    stack: [
+      { label: 'Frontend', pills: ['React'] },
+      { label: 'Backend',  pills: ['Node.js', 'SQLite'] },
+    ],
+    link: null,
+    wip: false,
+    foodIcon: null, // assign your own: e.g. '/img/food/dumplings.png'
+  },
+  {
+    id: '02',
+    title: 'Portfolio Website',
+    subtitle: 'This very site',
+    description: 'A brunch-themed personal portfolio with an interactive menu table, editorial typography, and food-as-navigation. Designed and built from scratch.',
+    year: '2025',
+    images: [],
+    stack: [
+      { label: 'Frontend', pills: ['React'] },
+    ],
+    link: null,
+    wip: false,
+    foodIcon: null,
+  },
+  {
+    id: '03',
+    title: 'NUS Health Hack 2025',
+    subtitle: 'Surgipedia — surgical media transcription',
+    description: 'A speech-to-text and image-to-text mockup designed for surgical researchers to efficiently transcribe audio and visual data into structured outputs.',
+    year: '2025',
+    images: [
+      '/img/project1-1.jpg',
+      '/img/project1-2.jpg',
+      '/img/project1-3.jpg',
+      '/img/project1-4.jpg',
+      '/img/project1-5.jpg',
+    ],
+    stack: [
+      { label: 'Frontend', pills: ['Figma', 'React', 'Tailwind CSS'] },
+      { label: 'Backend',  pills: ['Deno'] },
+    ],
+    link: null,
+    wip: false,
+    foodIcon: null,
+  },
+  {
+    id: '04',
+    title: 'Captcha Demo',
+    subtitle: 'Image-based human verification',
+    description: 'A custom captcha built with React — users select images by category to verify they\'re human.',
+    year: '2025',
+    images: [
+      '/img/project3-1.jpg',
+      '/img/project3-2.jpg',
+      '/img/project3-3.jpg',
+    ],
+    stack: [
+      { label: 'Frontend', pills: ['React'] },
+    ],
+    link: { href: '/captcha-demo', label: 'Try Demo', kind: 'route' },
+    wip: true,
+    foodIcon: null,
+  },
+];
 
-  const project4Images = [
-    '/img/project4-1.jpg',
-    '/img/project4-2.jpg',
-    '/img/project4-3.jpg'
-  ];
+export default function Projects() {
+  const [expandedId, setExpandedId] = useState(null);
+  const toggle = (id) => setExpandedId(prev => prev === id ? null : id);
 
   return (
-    <section id="projects" className="projects-section py-5">
-      <Container>
-        <h2 className="section-title mb-5 text-center">Projects</h2>
+    <section id="projects" className="projectsSection">
+      <div className="projectsInner">
 
-        {/* Project 1 */}
-        <Row className="mb-5 align-items-center text-start">
-          <Col md={5}>
-            <ImageCarousel 
-              images={project1Images}
-              alt="Surgipedia App"
-            />
-          </Col>
-          <Col md={7}>
-            <h4 className="mb-2">NUS Health Hack 2025</h4>
-            <p>
-              Developed Surgipedia, a speech-to-text and image-to-text mockup designed for surgical researchers
-              to efficiently transcribe audio and visual data into structured outputs.
-              Surgipedia helps clinicians convert complex surgical media into usable insights.
-            </p>
-            <div className="tech-stack">
-              <div className="tech-category">
-                <span className="tech-label">Frontend:</span>
-                <span className="capsule">Figma</span>
-                <span className="capsule">React</span>
-                <span className="capsule">Tailwind CSS</span>
-              </div>
-              <div className="tech-category">
-                <span className="tech-label">Backend:</span>
-                <span className="capsule">Deno</span>
-              </div>
-            </div>
-          </Col>
-        </Row>
+        <header className="projectsHeader">
+          <p className="projectsEyebrow">Elodie Yeung · 2026</p>
+          <div className="projectsTitleRow">
+            <span className="projectsTitleRule" />
+            <h2 className="projectsTitle">Chef's Specialties</h2>
+            <span className="projectsTitleRule" />
+          </div>
+          <p className="projectsSubtitle">a curated selection of recent work</p>
+        </header>
 
-        {/* Project 2 */}
-        <Row className="mb-5 align-items-center text-start">
-          <Col md={5}>
-            <img
-              src="/images/project2.jpg"
-              alt="Portfolio Website"
-              className="img-fluid rounded shadow"
-              style={{ maxWidth: '100%', width: '300px' }}
-            />
-          </Col>
-          <Col md={7}>
-            <h4 className="mb-2">Portfolio Website (here!)</h4>
-            <p>
-              Personal portfolio website showcasing my work and skills, with smooth scrolling, responsive layout, and themed design.
-            </p>
-            <div className="tech-stack">
-              <div className="tech-category">
-                <span className="tech-label">Frontend:</span>
-                <span className="capsule">React</span>
-              </div>
-            </div>
-          </Col>
-        </Row>
+        <div className="menuList">
+          {PROJECTS.map(project => {
+            const isOpen = expandedId === project.id;
+            return (
+              <article key={project.id} className={`menuItem${isOpen ? ' isOpen' : ''}`}>
 
-        {/* Project 3 - With Carousel */}
-        <Row className="mb-5 align-items-center text-start">
-          <Col md={5}>
-            <ImageCarousel 
-              images={project3Images}
-              alt="Captcha Demo"
-            />
-          </Col>
-          <Col md={7}>
-            <h4 className="mb-3">Captcha Demo</h4>
-            <p>
-              A simple captcha demo built with React, allowing users to select images based on categories.
-            </p>
-            <Link to="/captcha-demo" className="demo-btn">
-              Try Demo →
-            </Link>
-            <div className="tech-stack">
-              <div className="tech-category">
-                <span className="tech-label">Frontend:</span>
-                <span className="capsule">React</span>
-              </div>
-            </div>
-          </Col>
-        </Row>
+                <button
+                  className="menuItemHeader"
+                  onClick={() => toggle(project.id)}
+                  aria-expanded={isOpen}
+                >
+                  <span className="menuItemNumber">{project.id}</span>
 
-        {/* Project 4 - With Carousel */}
-        <Row className="mb-5 align-items-center text-start">
-          <Col md={5}>
-            <ImageCarousel 
-              images={project4Images}
-              alt="NASA Space Apps Challenge - AirQ"
-            />
-          </Col>
-          <Col md={7}>
-            <h4 className="mb-2">NASA Space Apps Challenge</h4>
-            <p>
-              Developed AirQ, a location-based air quality monitoring web app that integrates NASA's TEMPO satellite data with ground measurements and weather information.
-              Users can select their location to view real-time pollution levels, receive health recommendations, and track air quality trends through an interactive dashboard.
-            </p>
-            <div className="tech-stack">
-              <div className="tech-category">
-                <span className="tech-label">Frontend:</span>
-                <span className="capsule">React</span>
-              </div>
-              <div className="tech-category">
-                <span className="tech-label">Backend:</span>
-                <span className="capsule">Node.js</span>
-                <span className="capsule">SQLite</span>
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </Container>
+                  <span className="menuItemTitleGroup">
+                    {project.foodIcon && (
+                      <img src={project.foodIcon} alt="" className="menuItemIcon" aria-hidden="true" />
+                    )}
+                    <span className="menuItemTitle">{project.title}</span>
+                    {project.wip && <span className="menuItemWip">In progress</span>}
+                  </span>
+
+                  <span className="menuItemLeader" aria-hidden="true" />
+                  <span className="menuItemYear">{project.year}</span>
+                  <span className="menuItemChevron">{isOpen ? '−' : '+'}</span>
+                </button>
+
+                <p className="menuItemSubtitle">{project.subtitle}</p>
+
+                <div className={`menuItemBody${isOpen ? ' isVisible' : ''}`}>
+                  <p className="menuItemDesc">{project.description}</p>
+
+                  <div className="menuItemMeta">
+                    <div className="menuItemStack">
+                      {project.stack.map(row => (
+                        <div key={row.label} className="menuItemStackRow">
+                          <span className="menuItemStackLabel">{row.label}</span>
+                          {row.pills.map(p => (
+                            <span key={p} className="menuItemPill">{p}</span>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                    {project.link && (
+                      project.link.kind === 'route'
+                        ? <Link to={project.link.href} className="menuItemLink">{project.link.label} →</Link>
+                        : <a href={project.link.href} target="_blank" rel="noopener noreferrer" className="menuItemLink">{project.link.label} →</a>
+                    )}
+                  </div>
+
+                  {project.images.length > 0 && (
+                    <div className="menuItemCarousel">
+                      <ImageCarousel images={project.images} alt={project.title} />
+                    </div>
+                  )}
+                </div>
+
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="projectsFooter">more dishes coming soon</div>
+
+      </div>
     </section>
   );
 }

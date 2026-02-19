@@ -34,6 +34,12 @@ body {
   padding-top: 4rem;  /* offset for fixed navbar */
 }
 
+body.home-brunch {
+  padding-top: 0;
+  background-color: #f5f0e8; /* match brunch landing */
+  color: #1a1a1a;
+}
+
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
   color: #949366;
