@@ -1,157 +1,121 @@
-/* ── CAROUSEL ───────────────────────────────────────────────────────── */
-.carousel {
-  width: 100%;
-  height: 100%;
+/* ── THUMBNAIL STRIP ────────────────────────────────────────────────── */
+.thumbStrip {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
 }
 
-.carouselTrack {
+.thumbBtn {
   position: relative;
-  width: 100%;
-  flex: 1;
-  min-height: 0;
-  cursor: zoom-in;
+  width: 80px;
+  height: 60px;
+  flex-shrink: 0;
+  appearance: none;
+  border: 1px solid rgba(196,149,106,0.2);
+  border-radius: 2px;
+  padding: 0;
   overflow: hidden;
+  cursor: zoom-in;
+  background: #ede8df;
+  transition: border-color 0.2s, transform 0.2s;
 }
 
-.carouselImg {
+.thumbBtn:hover {
+  border-color: #c4956a;
+  transform: translateY(-2px);
+}
+
+.thumbImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
+  transition: transform 0.3s ease;
 }
 
-.carouselTrack:hover .carouselImg {
-  transform: scale(1.03);
+.thumbBtn:hover .thumbImg {
+  transform: scale(1.08);
 }
 
-/* Prev / Next */
-.carouselBtn {
+.thumbOverlay {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  appearance: none;
-  border: 1px solid rgba(255,255,255,0.55);
-  background: rgba(0,0,0,0.28);
-  color: #fff;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  font-size: 13px;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s, background 0.2s;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  background: rgba(0,0,0,0.28);
+  color: #fff;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
-.carouselTrack:hover .carouselBtn { opacity: 1; }
-.carouselBtn:hover { background: rgba(0,0,0,0.55); }
-.carouselBtn--prev { left: 10px; }
-.carouselBtn--next { right: 10px; }
-
-.carouselCounter {
-  position: absolute;
-  bottom: 10px;
-  right: 12px;
-  font-family: 'DM Mono', ui-monospace, monospace;
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.9);
-  background: rgba(0,0,0,0.3);
-  padding: 3px 8px;
-  border-radius: 100px;
-  pointer-events: none;
+.thumbBtn:hover .thumbOverlay {
+  opacity: 1;
 }
 
-.carouselDots {
-  display: flex;
-  gap: 6px;
-  justify-content: center;
-  padding: 8px 0 6px;
-  background: #faf8f4;
-  flex-shrink: 0;
-}
-
-.carouselDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.14);
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.carouselDot.isActive {
-  background: #c4956a;
-  transform: scale(1.35);
-}
-
-/* ── FULLSCREEN ──────────────────────────────────────────────────────── */
-.carouselFullscreen {
+/* ── LIGHTBOX ────────────────────────────────────────────────────────── */
+.lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.95);
+  background: rgba(0,0,0,0.94);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 99999;
   cursor: pointer;
-  animation: carouselFadeIn 0.25s ease;
+  animation: lbFadeIn 0.22s ease;
 }
 
-@keyframes carouselFadeIn {
+@keyframes lbFadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
-.carouselFullscreenImg {
-  max-width: 90vw;
-  max-height: 88vh;
+.lightboxImg {
+  max-width: 88vw;
+  max-height: 84vh;
   object-fit: contain;
   cursor: default;
   border-radius: 2px;
-  animation: carouselZoomIn 0.25s ease;
+  animation: lbZoomIn 0.22s ease;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
 }
 
-@keyframes carouselZoomIn {
-  from { transform: scale(0.93); opacity: 0; }
+@keyframes lbZoomIn {
+  from { transform: scale(0.94); opacity: 0; }
   to   { transform: scale(1);    opacity: 1; }
 }
 
-.carouselFullscreenClose {
+.lightboxClose {
   position: fixed;
-  top: 20px; right: 28px;
+  top: 20px; right: 24px;
   appearance: none;
   border: 0;
   background: transparent;
-  color: rgba(255,255,255,0.6);
-  font-size: 26px;
+  color: rgba(255,255,255,0.55);
+  font-size: 24px;
   cursor: pointer;
   z-index: 100000;
   transition: color 0.2s;
   padding: 8px;
+  line-height: 1;
 }
-.carouselFullscreenClose:hover { color: #fff; }
+.lightboxClose:hover { color: #fff; }
 
-.carouselFullscreenBtn {
+.lightboxBtn {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
   appearance: none;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.07);
   color: #fff;
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
   z-index: 100000;
   transition: background 0.2s;
@@ -159,42 +123,49 @@
   align-items: center;
   justify-content: center;
 }
-.carouselFullscreenBtn:hover { background: rgba(255,255,255,0.18); }
-.carouselFullscreenBtn--prev { left: 30px; }
-.carouselFullscreenBtn--next { right: 30px; }
+.lightboxBtn:hover { background: rgba(255,255,255,0.16); }
+.lightboxBtn--prev { left: 28px; }
+.lightboxBtn--next { right: 28px; }
 
-.carouselFullscreenDots {
+.lightboxDots {
   position: fixed;
-  bottom: 30px;
+  bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 10px;
+  gap: 8px;
   z-index: 100000;
 }
 
-.carouselFullscreenDot {
-  width: 8px; height: 8px;
+.lightboxDot {
+  width: 7px; height: 7px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.3);
   border: none;
   cursor: pointer;
   padding: 0;
   transition: background 0.2s, transform 0.2s;
 }
-.carouselFullscreenDot.isActive {
+.lightboxDot.isActive {
   background: #c4956a;
   transform: scale(1.4);
 }
 
-.carouselFullscreenCounter {
+.lightboxCounter {
   position: fixed;
-  bottom: 68px;
+  bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
   font-family: 'DM Mono', ui-monospace, monospace;
   font-size: 10px;
   letter-spacing: 0.18em;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.45);
   z-index: 100000;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .thumbBtn { width: 64px; height: 48px; }
+  .lightboxBtn--prev { left: 12px; }
+  .lightboxBtn--next { right: 12px; }
 }

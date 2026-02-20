@@ -9,11 +9,11 @@ function clamp(n, min, max) {
 const SOCIAL_DATA = [
   { label: 'GitHub',    href: 'https://github.com/rollingchair63',         kind: 'external', icon: '🛠' },
   { label: 'LinkedIn',  href: 'https://www.linkedin.com/in/elodieyyx',    kind: 'external', icon: '💬' },
-  { label: 'Email me',  href: 'mailto:elodieyeung@gmail.com',               kind: 'external', icon: '✉️' },
+  { label: 'Email me',  href: 'mailto:hello@elodie.design',               kind: 'external', icon: '✉️' },
 ];
 
 // Drop your resume PDF into /public and update this path
-const RESUME_PDF = '/assets/ElodieYeung_Resume.pdf';
+const RESUME_PDF = '/resume.pdf';
 
 export default function BrunchTableLanding() {
   const navigate  = useNavigate();
@@ -34,7 +34,7 @@ export default function BrunchTableLanding() {
       tags:     [],
       imageSrc: '/img/food/dumplings.png',
       imageAlt: 'Dumplings',
-      scrollTo: 'about',
+      scrollTo: null,
     },
     {
       key:      'skills',

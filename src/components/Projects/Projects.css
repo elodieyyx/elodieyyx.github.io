@@ -1,34 +1,28 @@
 /* ── PROJECTS — Printed Menu Aesthetic ──────────────────────────────── */
 .projectsSection {
-  background: #faf8f4;
   position: relative;
-  padding: 0 0 120px;
-}
-
-/* Dashed top border like a menu page break */
-.projectsSection::before {
-  content: '';
-  display: block;
-  height: 6px;
-  background: repeating-linear-gradient(
-    90deg,
-    #c4956a 0px, #c4956a 4px,
-    transparent 4px, transparent 14px
-  );
-  opacity: 0.4;
-  margin-bottom: 80px;
+  padding: 60px 20px 120px;
+  background: #f5f0e8;
 }
 
 .projectsInner {
-  max-width: 860px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 0 48px;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.12));
+}
+
+/* ── MENU CARD FRAME ────────────────────────────────────────────────── */
+.projectsMenuFrame {
+  position: relative;
+  padding: 48px 80px 72px;
 }
 
 /* ── HEADER ─────────────────────────────────────────────────────────── */
 .projectsHeader {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 32px;
 }
 
 .projectsEyebrow {
@@ -37,7 +31,7 @@
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: #c4956a;
-  margin-bottom: 18px;
+  margin-bottom: 26px;
 }
 
 .projectsTitleRow {
@@ -85,7 +79,6 @@
   flex-direction: column;
 }
 
-/* Divider between items */
 .menuItem + .menuItem {
   border-top: 1px solid rgba(196,149,106,0.18);
 }
@@ -156,7 +149,6 @@
   flex-shrink: 0;
 }
 
-/* Dotted leader line — classic menu typography */
 .menuItemLeader {
   flex: 1;
   height: 1px;
@@ -195,7 +187,7 @@
   font-style: italic;
   color: #8a8070;
   margin: 6px 0 0 0;
-  padding-left: 36px; /* aligns under title, past the number */
+  padding-left: 36px;
 }
 
 /* ── EXPANDABLE BODY ────────────────────────────────────────────────── */
@@ -204,19 +196,15 @@
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+  padding-left: 36px;
 }
 
 .menuItemBody.isVisible {
   grid-template-rows: 1fr;
 }
 
-/* Inner wrapper needed for grid-template-rows animation */
 .menuItemBody > * {
   overflow: hidden;
-}
-
-.menuItemBody {
-  padding-left: 36px;
 }
 
 .menuItemDesc {
@@ -287,21 +275,6 @@
 }
 .menuItemLink:hover { color: #c4956a; border-color: #c4956a; }
 
-/* ── CAROUSEL INSIDE MENU ITEM ──────────────────────────────────────── */
-.menuItemCarousel {
-  margin-bottom: 8px;
-  border-radius: 2px;
-  overflow: hidden;
-  border: 1px solid rgba(196,149,106,0.15);
-  aspect-ratio: 16 / 7;
-}
-
-.menuItemCarousel .carousel,
-.menuItemCarousel .carouselTrack {
-  width: 100%;
-  height: 100%;
-}
-
 /* ── FOOTER ─────────────────────────────────────────────────────────── */
 .projectsFooter {
   text-align: center;
@@ -327,10 +300,23 @@
 }
 
 /* ── RESPONSIVE ─────────────────────────────────────────────────────── */
-@media (max-width: 600px) {
-  .projectsInner { padding: 0 20px; }
-  .projectsTitle { white-space: normal; }
-  .menuItemSubtitle,
-  .menuItemBody { padding-left: 0; }
-  .menuItemCarousel { aspect-ratio: 16 / 9; }
+@media (max-width: 768px) {
+  .projectsSection { padding: 40px 16px 80px; }
+  .projectsMenuFrame { padding: 60px 40px 60px; }
+  .projectsTitle { font-size: clamp(22px, 6vw, 32px); white-space: normal; }
+  .projectsTitleRule { max-width: 40px; }
+  .menuItemHeader { gap: 6px; }
+  .menuItemTitle { font-size: clamp(13px, 3.5vw, 18px); }
+  .menuItemNumber { font-size: 8px; }
+  .menuItemYear { font-size: 8px; }
+  .menuItemChevron { font-size: 13px; }
+  .menuItemSubtitle, .menuItemBody { padding-left: 0; }
+  .menuItemDesc { font-size: 13px; }
+  .projectsFooter { font-size: 7px; }
+}
+
+@media (max-width: 500px) {
+  .projectsMenuFrame { padding: 56px 28px 56px; }
+  .menuItemTitle { font-size: clamp(12px, 3vw, 16px); }
+  .menuItemWip { display: none; } /* hide badge if it causes overflow */
 }

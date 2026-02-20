@@ -1,80 +1,82 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ImageCarousel.css';
 
 export default function ImageCarousel({ images, alt }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
-  const handlePrevious = (e) => {
+  const isOpen = lightboxIndex !== null;
+
+  const prev = (e) => {
     e.stopPropagation();
-    setCurrentIndex(prev => prev === 0 ? images.length - 1 : prev - 1);
+    setLightboxIndex(i => (i === 0 ? images.length - 1 : i - 1));
   };
 
-  const handleNext = (e) => {
+  const next = (e) => {
     e.stopPropagation();
-    setCurrentIndex(prev => prev === images.length - 1 ? 0 : prev + 1);
+    setLightboxIndex(i => (i === images.length - 1 ? 0 : i + 1));
   };
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = e => {
+      if (e.key === 'Escape')     setLightboxIndex(null);
+      if (e.key === 'ArrowLeft')  setLightboxIndex(i => (i === 0 ? images.length - 1 : i - 1));
+      if (e.key === 'ArrowRight') setLightboxIndex(i => (i === images.length - 1 ? 0 : i + 1));
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen, images.length]);
 
   if (!images || images.length === 0) return null;
 
   return (
     <>
-      <div className="carousel">
-        <div className="carouselTrack" onClick={() => setIsFullscreen(true)}>
-          <img
-            src={images[currentIndex]}
-            alt={`${alt} (${currentIndex + 1} of ${images.length})`}
-            className="carouselImg"
-          />
-          {images.length > 1 && (
-            <>
-              <button className="carouselBtn carouselBtn--prev" onClick={handlePrevious} aria-label="Previous">←</button>
-              <button className="carouselBtn carouselBtn--next" onClick={handleNext} aria-label="Next">→</button>
-            </>
-          )}
-          <div className="carouselCounter">{currentIndex + 1} / {images.length}</div>
-        </div>
-
-        {images.length > 1 && (
-          <div className="carouselDots">
-            {images.map((_, i) => (
-              <button
-                key={i}
-                className={`carouselDot${i === currentIndex ? ' isActive' : ''}`}
-                onClick={() => setCurrentIndex(i)}
-                aria-label={`Go to image ${i + 1}`}
-              />
-            ))}
-          </div>
-        )}
+      {/* Thumbnail strip */}
+      <div className="thumbStrip">
+        {images.map((src, i) => (
+          <button
+            key={i}
+            className="thumbBtn"
+            onClick={() => setLightboxIndex(i)}
+            aria-label={`View image ${i + 1} of ${images.length}`}
+          >
+            <img src={src} alt={`${alt} ${i + 1}`} className="thumbImg" />
+            <span className="thumbOverlay">⤢</span>
+          </button>
+        ))}
       </div>
 
-      {isFullscreen && (
-        <div className="carouselFullscreen" onClick={() => setIsFullscreen(false)}>
-          <button className="carouselFullscreenClose" onClick={() => setIsFullscreen(false)}>✕</button>
+      {/* Lightbox */}
+      {isOpen && (
+        <div className="lightbox" onClick={() => setLightboxIndex(null)}>
+          <button className="lightboxClose" onClick={() => setLightboxIndex(null)} aria-label="Close">✕</button>
+
           <img
-            src={images[currentIndex]}
-            alt={`${alt} (${currentIndex + 1} of ${images.length})`}
-            className="carouselFullscreenImg"
+            src={images[lightboxIndex]}
+            alt={`${alt} (${lightboxIndex + 1} of ${images.length})`}
+            className="lightboxImg"
             onClick={e => e.stopPropagation()}
           />
+
           {images.length > 1 && (
             <>
-              <button className="carouselFullscreenBtn carouselFullscreenBtn--prev" onClick={handlePrevious}>←</button>
-              <button className="carouselFullscreenBtn carouselFullscreenBtn--next" onClick={handleNext}>→</button>
-              <div className="carouselFullscreenDots">
+              <button className="lightboxBtn lightboxBtn--prev" onClick={prev}>←</button>
+              <button className="lightboxBtn lightboxBtn--next" onClick={next}>→</button>
+
+              <div className="lightboxDots">
                 {images.map((_, i) => (
                   <button
                     key={i}
-                    className={`carouselFullscreenDot${i === currentIndex ? ' isActive' : ''}`}
-                    onClick={e => { e.stopPropagation(); setCurrentIndex(i); }}
+                    className={`lightboxDot${i === lightboxIndex ? ' isActive' : ''}`}
+                    onClick={e => { e.stopPropagation(); setLightboxIndex(i); }}
                     aria-label={`Go to image ${i + 1}`}
                   />
                 ))}
               </div>
             </>
           )}
-          <div className="carouselFullscreenCounter">{currentIndex + 1} / {images.length}</div>
+
+          <div className="lightboxCounter">{lightboxIndex + 1} / {images.length}</div>
         </div>
       )}
     </>
