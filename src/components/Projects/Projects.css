@@ -301,32 +301,122 @@
   background: #c4956a;
 }
 
-/* ── RESPONSIVE ─────────────────────────────────────────────────────── */
+/* ── MOBILE ONLY: clean card layout, no decorative frame ─────────────────── */
 @media (max-width: 768px) {
-  .projectsSection { padding: 24px 12px 60px; }
-  .projectsInner { transform: none; } /* remove scale on mobile — it causes overflow */
-  .projectsMenuFrame { padding: 48px 28px 52px; }
-  .projectsTitle { font-size: clamp(22px, 6vw, 32px); white-space: normal; }
-  .projectsTitleRule { max-width: 40px; }
-  .menuItemHeader { gap: 6px; }
-  .menuItemTitle { font-size: clamp(14px, 3.5vw, 20px); }
-  .menuItemNumber { font-size: 8px; }
-  .menuItemYear { font-size: 8px; }
-  .menuItemChevron { font-size: 13px; }
-  .menuItemSubtitle, .menuItemBody { padding-left: 0; }
-  .menuItemDesc { font-size: 14px; }
-  .projectsFooter { font-size: 7px; }
-}
+  .projectsSection {
+    padding: 40px 16px 60px;
+    background: #f5f0e8;
+  }
 
-@media (max-width: 500px) {
-  .projectsSection { padding: 16px 8px 48px; }
-  .projectsMenuFrame { padding: 40px 20px 44px; }
-  .menuItemTitle { font-size: clamp(13px, 3.5vw, 17px); }
-  .menuItemWip { display: none; }
-  .menuItemLeader { min-width: 10px; }
-  .menuItemStackLabel { min-width: 52px; }
-}
+  .projectsInner {
+    transform: none;
+    filter: none;
+  }
 
+  .projectsMenuFrame {
+    background-image: none !important;
+    background: #faf8f4;
+    border: 1px solid rgba(196, 149, 106, 0.2);
+    border-radius: 4px;
+    padding: 40px 24px 48px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
+  }
+
+  /* Header — keep the title, drop the rules since no frame */
+  .projectsEyebrow {
+    font-size: 7px;
+    margin-bottom: 16px;
+  }
+
+  .projectsTitleRow {
+    gap: 12px;
+  }
+
+  .projectsTitleRule {
+    max-width: 32px;
+  }
+
+  .projectsTitle {
+    font-size: clamp(24px, 7vw, 34px);
+    white-space: normal;
+  }
+
+  .projectsSubtitle {
+    font-size: 14px;
+  }
+
+  /* List items */
+  .menuItem {
+    padding: 16px 0;
+  }
+
+  .menuItem + .menuItem {
+    border-top: 1px solid rgba(196, 149, 106, 0.15);
+  }
+
+  .menuItemHeader {
+    gap: 8px;
+  }
+
+  .menuItemNumber {
+    font-size: 8px;
+  }
+
+  .menuItemTitle {
+    font-size: clamp(15px, 4vw, 20px);
+  }
+
+  .menuItemYear {
+    font-size: 8px;
+  }
+
+  .menuItemChevron {
+    font-size: 14px;
+  }
+
+  .menuItemWip {
+    display: none; /* avoid overflow on small screens */
+  }
+
+  .menuItemLeader {
+    min-width: 8px;
+  }
+
+  .menuItemSubtitle {
+    font-size: 14px;
+    padding-left: 0;
+    margin-top: 4px;
+  }
+
+  .menuItemBody {
+    padding-left: 0;
+  }
+
+  .menuItemDesc {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .menuItemStackLabel {
+    min-width: 56px;
+    font-size: 6px;
+  }
+
+  .menuItemPill {
+    font-size: 8px;
+    padding: 3px 9px;
+  }
+
+  .projectsFooter {
+    margin-top: 40px;
+    font-size: 7px;
+  }
+
+  .projectsFooter::before,
+  .projectsFooter::after {
+    width: 36px;
+  }
+}
 /* ── FEATURED (Tariff Calculator) ─────────────────────────── */
 .menuItem.isFeatured {
   border: 1px solid rgba(212, 175, 55, 0.5);
