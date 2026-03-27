@@ -303,24 +303,28 @@
 
 /* ── RESPONSIVE ─────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .projectsSection { padding: 40px 16px 80px; }
-  .projectsMenuFrame { padding: 60px 40px 60px; }
+  .projectsSection { padding: 24px 12px 60px; }
+  .projectsInner { transform: none; } /* remove scale on mobile — it causes overflow */
+  .projectsMenuFrame { padding: 48px 28px 52px; }
   .projectsTitle { font-size: clamp(22px, 6vw, 32px); white-space: normal; }
   .projectsTitleRule { max-width: 40px; }
   .menuItemHeader { gap: 6px; }
-  .menuItemTitle { font-size: clamp(13px, 3.5vw, 18px); }
+  .menuItemTitle { font-size: clamp(14px, 3.5vw, 20px); }
   .menuItemNumber { font-size: 8px; }
   .menuItemYear { font-size: 8px; }
   .menuItemChevron { font-size: 13px; }
   .menuItemSubtitle, .menuItemBody { padding-left: 0; }
-  .menuItemDesc { font-size: 13px; }
+  .menuItemDesc { font-size: 14px; }
   .projectsFooter { font-size: 7px; }
 }
 
 @media (max-width: 500px) {
-  .projectsMenuFrame { padding: 56px 28px 56px; }
-  .menuItemTitle { font-size: clamp(12px, 3vw, 16px); }
-  .menuItemWip { display: none; } /* hide badge if it causes overflow */
+  .projectsSection { padding: 16px 8px 48px; }
+  .projectsMenuFrame { padding: 40px 20px 44px; }
+  .menuItemTitle { font-size: clamp(13px, 3.5vw, 17px); }
+  .menuItemWip { display: none; }
+  .menuItemLeader { min-width: 10px; }
+  .menuItemStackLabel { min-width: 52px; }
 }
 
 /* ── FEATURED (Tariff Calculator) ─────────────────────────── */

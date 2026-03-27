@@ -582,19 +582,36 @@
     height: clamp(90px, 19vw, 120px);
   }
 
+  /* Modal */
   .brunchModal {
-    padding: 32px 28px 36px;
     width: min(92vw, 420px);
   }
 
-  .brunchModalImageBtn {
-    width: 120px;
-    height: 120px;
-    top: -44px;
-    right: -16px;
+  .brunchModalInner {
+    padding: 32px 24px 36px; /* was 44px 48px — too wide for mobile */
+    max-height: 85vh;
   }
 
-  .brunchModalBody  { max-width: 100%; }
+  .brunchModalImageBtn {
+    width: 100px;
+    height: 100px;
+    top: -36px;
+    right: -10px;
+  }
+
+  .brunchModalTitle {
+    font-size: clamp(22px, 6vw, 30px);
+  }
+
+  .brunchModalBody { max-width: 100%; }
   .brunchModalLinks { grid-template-columns: 1fr; }
-  .brunchResumeFrame { height: 360px; }
+
+  /* Resume modal — show a download button instead of a giant iframe on mobile */
+  .brunchModal--resume {
+    width: min(92vw, 420px); /* don't go wide on mobile */
+  }
+
+  .brunchResumeFrame {
+    height: 280px; /* was 360px — more compact */
+  }
 }
