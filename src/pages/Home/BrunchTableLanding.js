@@ -40,17 +40,17 @@ export default function BrunchTableLanding() {
   const items = useMemo(() => [
     {
       key: 'about', section: 'About Me', title: "Hello, I'm Elodie!",
-      body: 'A computer science student who loves crafting thoughtful digital experiences. I blend creativity with code to build things people enjoy using.',
+      body: 'A computer science student from SMU who loves crafting thoughtful digital experiences. I blend creativity with code to build things people enjoy using. ps. I REALLY REALLY LOVE DUMPLINGS 🥟.',
       tags: [], imageSrc: '/img/food/dumplings.png', imageAlt: 'Dumplings', scrollTo: null,
     },
     {
       key: 'skills', section: 'Skills', title: 'What I bring to the table!',
-      body: 'A mix of design intuition and technical fluency — from UI polish to shipping features.',
+      body: 'A mix of technical skills and soft skills, with a dash of creativity and a sprinkle of teamwork. I value clear communication and a growth mindset in all my projects :D',
       tags: [],
       skillGroups: [
         { label: 'Programming Languages',  items: ['C', 'Java', 'JavaScript', 'SQL', 'CSS'] },
         { label: 'Libraries & Frameworks', items: ['React', 'Spring Boot', 'Node.js', 'Tailwind CSS'] },
-        { label: 'Tools & Platforms',      items: ['Git', 'GitHub', 'Figma'] },
+        { label: 'Tools & Platforms',      items: ['GitHub', 'Figma', 'Expo'] },
       ],
       imageSrc: '/img/food/takoyaki.png', imageAlt: 'Takoyaki', scrollTo: null,
     },
@@ -61,9 +61,9 @@ export default function BrunchTableLanding() {
     },
     {
       key: 'projects', section: 'Projects', title: "Things I've cooked!",
-      body: 'Interactive experiments and production apps — each project is a chance to learn and push craft.',
+      body: 'Projects built from hackathons or from a random lightbulb moment 💡 — a taste of what I can do!',
       tags: [],
-      imageSrc: '/img/food/matcha.png', imageAlt: 'Matcha dessert', scrollTo: 'projects',
+      imageSrc: '/img/food/matcha.png', imageAlt: 'Strawberry Matcha', scrollTo: 'projects',
     },
     {
       key: 'socials', section: 'Socials', title: 'Send your compliments to the chef!',

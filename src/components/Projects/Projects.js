@@ -25,7 +25,7 @@ const PROJECTS = [
     id: '02',
     title: 'Plotwise',
     subtitle: 'Event decoration visualisation mobile app',
-    description: 'Built a mobile app using Expo to help users visualise and plan event decorations with intuitive UI and real-time layout feedback.',
+    description: 'Built a mobile app using Expo to help users visualise decorations in their own spaces.',
     year: '2026',
     images: [],
     stack: [
@@ -37,8 +37,8 @@ const PROJECTS = [
   },
   {
     id: '03',
-    title: 'LinkedIn Spam Detector Bot',
-    subtitle: 'Telegram bot for filtering spammy outreach',
+    title: 'EntrepreNO',
+    subtitle: 'Telegram bot for filtering spammy outreach on LinkedIn',
     description: 'Built a Telegram bot to analyse LinkedIn connection requests and messages, flagging spammy or low-signal outreach using rule-based filtering and text heuristics.',
     year: '2026',
     images: [],
