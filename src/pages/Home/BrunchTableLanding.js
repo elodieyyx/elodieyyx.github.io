@@ -40,7 +40,7 @@ export default function BrunchTableLanding() {
   const items = useMemo(() => [
     {
       key: 'about', section: 'About Me', title: "Hello, I'm Elodie!",
-      body: 'A computer science student from SMU who loves crafting thoughtful digital experiences. I blend creativity with code to build things people enjoy using. ps. I REALLY REALLY LOVE DUMPLINGS 🥟.',
+      body: 'A computer science student from SMU who loves crafting meaningful digital experiences. I blend creativity with code to build things people enjoy using. ps. I REALLY REALLY LOVE DUMPLINGS 🥟.',
       tags: [], imageSrc: '/img/food/dumplings.png', imageAlt: 'Dumplings', scrollTo: null,
     },
     {
