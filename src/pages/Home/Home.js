@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Projects from '../../components/Projects/Projects';
 import { useLocation } from 'react-router-dom'
-import "./Home.css";
 import BrunchTableLanding from './BrunchTableLanding';
 
 export default function Home() {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import './ImageCarousel.css';
 
 export default function ImageCarousel({ images, alt }) {
@@ -29,6 +30,46 @@ export default function ImageCarousel({ images, alt }) {
 
   if (!images || images.length === 0) return null;
 
+  const lightbox = isOpen && createPortal(
+    <div className="lightbox" onClick={() => setLightboxIndex(null)}>
+      <button
+        className="lightboxClose"
+        onClick={() => setLightboxIndex(null)}
+        aria-label="Close"
+      >
+        ✕
+      </button>
+
+      <img
+        src={images[lightboxIndex]}
+        alt={`${alt} (${lightboxIndex + 1} of ${images.length})`}
+        className="lightboxImg"
+        onClick={e => e.stopPropagation()}
+      />
+
+      {images.length > 1 && (
+        <>
+          <button className="lightboxBtn lightboxBtn--prev" onClick={prev}>←</button>
+          <button className="lightboxBtn lightboxBtn--next" onClick={next}>→</button>
+
+          <div className="lightboxDots">
+            {images.map((_, i) => (
+              <button
+                key={i}
+                className={`lightboxDot${i === lightboxIndex ? ' isActive' : ''}`}
+                onClick={e => { e.stopPropagation(); setLightboxIndex(i); }}
+                aria-label={`Go to image ${i + 1}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
+      <div className="lightboxCounter">{lightboxIndex + 1} / {images.length}</div>
+    </div>,
+    document.body
+  );
+
   return (
     <>
       {/* Thumbnail strip */}
@@ -46,39 +87,8 @@ export default function ImageCarousel({ images, alt }) {
         ))}
       </div>
 
-      {/* Lightbox */}
-      {isOpen && (
-        <div className="lightbox" onClick={() => setLightboxIndex(null)}>
-          <button className="lightboxClose" onClick={() => setLightboxIndex(null)} aria-label="Close">✕</button>
-
-          <img
-            src={images[lightboxIndex]}
-            alt={`${alt} (${lightboxIndex + 1} of ${images.length})`}
-            className="lightboxImg"
-            onClick={e => e.stopPropagation()}
-          />
-
-          {images.length > 1 && (
-            <>
-              <button className="lightboxBtn lightboxBtn--prev" onClick={prev}>←</button>
-              <button className="lightboxBtn lightboxBtn--next" onClick={next}>→</button>
-
-              <div className="lightboxDots">
-                {images.map((_, i) => (
-                  <button
-                    key={i}
-                    className={`lightboxDot${i === lightboxIndex ? ' isActive' : ''}`}
-                    onClick={e => { e.stopPropagation(); setLightboxIndex(i); }}
-                    aria-label={`Go to image ${i + 1}`}
-                  />
-                ))}
-              </div>
-            </>
-          )}
-
-          <div className="lightboxCounter">{lightboxIndex + 1} / {images.length}</div>
-        </div>
-      )}
+      {/* Lightbox rendered into document.body via portal */}
+      {lightbox}
     </>
   );
 }

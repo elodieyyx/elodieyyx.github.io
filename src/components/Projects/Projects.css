@@ -1,12 +1,13 @@
 /* ── PROJECTS — Printed Menu Aesthetic ──────────────────────────────── */
 .projectsSection {
   position: relative;
-  padding: 60px 20px 120px;
+  padding: 40px 16px 80px;
   background: #f5f0e8;
 }
 
 .projectsInner {
-  max-width: 760px;
+  transform: scale(1.02);
+  max-width: 950px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
@@ -22,7 +23,8 @@
 /* ── HEADER ─────────────────────────────────────────────────────────── */
 .projectsHeader {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 .projectsEyebrow {
@@ -84,7 +86,7 @@
 }
 
 .menuItem {
-  padding: 28px 0;
+  padding: 18px 0;
 }
 
 /* ── ITEM HEADER (clickable row) ────────────────────────────────────── */
@@ -125,7 +127,7 @@
 
 .menuItemTitle {
   font-family: 'Playfair Display', ui-serif, serif;
-  font-size: clamp(18px, 2.2vw, 24px);
+  font-size: clamp(20px, 2.5vw, 28px);
   font-weight: 400;
   color: #1a1a1a;
   line-height: 1.2;
@@ -319,4 +321,32 @@
   .projectsMenuFrame { padding: 56px 28px 56px; }
   .menuItemTitle { font-size: clamp(12px, 3vw, 16px); }
   .menuItemWip { display: none; } /* hide badge if it causes overflow */
+}
+
+/* ── FEATURED (Tariff Calculator) ─────────────────────────── */
+.menuItem.isFeatured {
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  background: rgba(212, 175, 55, 0.05);
+  padding: 28px 16px;
+  margin: 0 -16px;
+  border-radius: 8px;
+}
+
+/* subtle glow on hover */
+.menuItem.isFeatured:hover {
+  box-shadow: 0 6px 24px rgba(212, 175, 55, 0.18);
+}
+
+/* ── CHEF BADGE ───────────────────────────────────────────── */
+.chefBadge {
+  margin-left: 10px;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #d4af37;
+  color: #1a1a1a;
+  font-weight: 600;
+  vertical-align: middle;
 }

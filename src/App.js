@@ -3,7 +3,6 @@ import './App.css';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Loading from './pages/Loading/Loading';
 import Home from './pages/Home/Home';
-import CaptchaDemo from './pages/Captcha/Demo';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -18,7 +17,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Navigate to="/" replace />} />
-            <Route path="/captcha-demo" element={<CaptchaDemo />} />
           </Routes>
         </>
       )}

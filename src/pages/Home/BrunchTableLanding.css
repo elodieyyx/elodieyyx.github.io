@@ -67,11 +67,32 @@
   padding: 80px 24px 60px;
 }
 
-/* ── CIRCULAR TABLE ─────────────────────────────────────────────────── */
-.brunchTable {
+/* ── SPINNER WRAPPER (rotates the whole table) ──────────────────────── */
+.brunchTableSpinner {
   width: min(820px, 86vmin);
   aspect-ratio: 1 / 1;
-  height: auto;
+  border-radius: 50%;
+  cursor: grab;
+  /* transform applied via inline style from React */
+  will-change: transform;
+  transition: filter 0.4s ease;
+  touch-action: none;
+  user-select: none;
+}
+
+.brunchTableSpinner:active {
+  cursor: grabbing;
+}
+
+.brunchTableSpinner.isBlurred {
+  filter: blur(6px) brightness(0.92);
+  pointer-events: none;
+}
+
+/* ── CIRCULAR TABLE ─────────────────────────────────────────────────── */
+.brunchTable {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   background: radial-gradient(ellipse at 40% 38%, #ffffff 0%, #faf8f4 50%, #f0ebe0 100%);
   position: relative;
@@ -80,13 +101,6 @@
     0 2px 0 rgba(255,255,255,0.95) inset,
     0 -2px 0 rgba(0,0,0,0.06) inset;
   border: 1px solid rgba(0,0,0,0.08);
-  transition: filter 0.4s ease, transform 0.4s ease;
-}
-
-.brunchTable.isBlurred {
-  filter: blur(6px) brightness(0.92);
-  transform: scale(0.97);
-  pointer-events: none;
 }
 
 .brunchTable::before {
@@ -100,7 +114,7 @@
 
 .brunchTableLabel {
   position: absolute;
-  bottom: -40px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 9px;
@@ -109,6 +123,8 @@
   color: var(--brunch-muted);
   white-space: nowrap;
   font-family: 'DM Mono', ui-monospace, monospace;
+  /* counter-rotation applied via inline style */
+  will-change: transform;
 }
 
 /* ── CENTER TEXT ────────────────────────────────────────────────────── */
@@ -116,11 +132,12 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  /* base transform applied inline, counter-rotation included */
   text-align: center;
   pointer-events: none;
   z-index: 4;
   width: 44%;
+  will-change: transform;
 }
 
 .brunchCenterText h1 {
@@ -162,7 +179,7 @@
   gap: 6px;
   width: clamp(150px, 23%, 220px);
   height: clamp(150px, 23%, 220px);
-  transform: translate(-50%, -50%) rotate(var(--rest-tilt, 0deg));
+  transform: translate(-50%, -50%);
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 2;
 }
@@ -174,20 +191,20 @@
 }
 
 .brunchDish:hover {
-  transform: translate(-50%, -50%) rotate(calc(var(--rest-tilt, 0deg) * 1.5)) translateY(-10px) scale(1.07);
+  transform: translate(-50%, -50%) translateY(-10px) scale(1.07);
 }
 
 .brunchDish.isActive {
-  transform: translate(-50%, -50%) rotate(0deg) translateY(-16px) scale(1.12) !important;
+  transform: translate(-50%, -50%) translateY(-16px) scale(1.12) !important;
   z-index: 3;
 }
 
-/* ── Ring positions ─────────────────────────────────────────────────── */
-.brunchDish--about   { left: 50%;  top: 13%;  --rest-tilt: -8deg;  }
-.brunchDish--skills  { left: 85%;  top: 36%;  --rest-tilt: 10deg;  }
-.brunchDish--links   { left: 72%;  top: 78%;  --rest-tilt: 7deg;   }
-.brunchDish--projects{ left: 28%;  top: 78%;  --rest-tilt: -6deg;  }
-.brunchDish--socials { left: 15%;  top: 36%;  --rest-tilt: -9deg;  }
+/* ── Ring positions (same as before) ───────────────────────────────── */
+.brunchDish--about    { left: 50%;  top: 13%; }
+.brunchDish--skills   { left: 85%;  top: 36%; }
+.brunchDish--links    { left: 72%;  top: 78%; }
+.brunchDish--projects { left: 28%;  top: 78%; }
+.brunchDish--socials  { left: 15%;  top: 36%; }
 
 /* ── IMAGE ──────────────────────────────────────────────────────────── */
 .brunchDishArt {
@@ -207,7 +224,8 @@
   user-select: none;
   -webkit-user-drag: none;
   filter: drop-shadow(0 10px 22px rgba(0,0,0,0.15));
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+  /* counter-rotation applied via inline style */
 }
 
 .brunchDish--about   .brunchDishImg { width: 148%; height: 148%; }
@@ -232,14 +250,14 @@
   white-space: nowrap;
   font-family: 'DM Mono', ui-monospace, monospace;
   line-height: 1;
-  transform: rotate(calc(var(--rest-tilt, 0deg) * -1));
-  transition: color 0.2s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+  /* counter-rotation applied via inline style */
+  transition: color 0.2s ease;
 }
 
 .brunchDish:hover .brunchDishTag,
 .brunchDish.isActive .brunchDishTag {
   color: var(--brunch-ink);
-  transform: rotate(0deg);
 }
 
 /* ── OVERLAY BACKDROP ───────────────────────────────────────────────── */
@@ -264,7 +282,6 @@
 .brunchModal {
   position: relative;
   width: min(480px, 88vw);
-  /* overflow must stay visible so the food image can hang outside */
   overflow: visible;
   background: var(--brunch-warm);
   border: 1px solid rgba(0,0,0,0.09);
@@ -277,14 +294,12 @@
   font-family: 'DM Mono', ui-monospace, monospace;
 }
 
-/* Inner wrapper handles scrolling without clipping the food image */
 .brunchModalInner {
   max-height: 88vh;
   overflow-y: auto;
   padding: 44px 48px 48px;
   border-radius: 2px;
   background: var(--brunch-warm);
-  /* Inner decorative border like a printed menu card */
   outline: 1px solid rgba(196,149,106,0.25);
   outline-offset: -10px;
 }
@@ -293,13 +308,11 @@
   transform: translateY(0) scale(1);
 }
 
-/* Resume modal — wider and taller to show the PDF */
 .brunchModal--resume {
   width: min(700px, 92vw);
   max-height: 92vh;
 }
 
-/* Food image button — top-right, doubles as close trigger */
 .brunchModalImageBtn {
   position: absolute;
   top: -60px;
@@ -330,11 +343,6 @@
   -webkit-user-drag: none;
 }
 
-/* Ensure close button always sits above the food image */
-.brunchModalClose {
-  z-index: 3;
-}
-
 .brunchModalClose {
   position: absolute;
   top: 16px; right: 18px;
@@ -347,7 +355,7 @@
   line-height: 1;
   padding: 4px 6px;
   transition: color 0.2s;
-  z-index: 2;
+  z-index: 3;
 }
 .brunchModalClose:hover { color: var(--brunch-ink); }
 
@@ -368,10 +376,7 @@
   color: var(--brunch-ink);
 }
 
-/* Resume modal title doesn't need to dodge a food image */
-.brunchModal--resume .brunchModalTitle {
-  max-width: 100%;
-}
+.brunchModal--resume .brunchModalTitle { max-width: 100%; }
 
 .brunchModalDivider {
   width: 32px;
@@ -390,9 +395,7 @@
   max-width: 80%;
 }
 
-.brunchModal--resume .brunchModalBody {
-  max-width: 100%;
-}
+.brunchModal--resume .brunchModalBody { max-width: 100%; }
 
 .brunchModalTags {
   display: flex;
@@ -436,17 +439,8 @@
   font-family: 'DM Mono', ui-monospace, monospace;
 }
 
-.brunchModalLink::before {
-  content: '→';
-  color: var(--brunch-accent);
-  font-size: 13px;
-}
-
-.brunchModalLinkIcon {
-  font-size: 13px;
-  line-height: 1;
-}
-
+.brunchModalLink::before { content: '→'; color: var(--brunch-accent); font-size: 13px; }
+.brunchModalLinkIcon { font-size: 13px; line-height: 1; }
 .brunchModalLink:hover { color: var(--brunch-accent); }
 
 /* ── RESUME PDF PREVIEW ─────────────────────────────────────────────── */
@@ -465,10 +459,7 @@
   background: #fff;
 }
 
-.brunchResumeCta {
-  align-self: flex-start;
-  text-decoration: none;
-}
+.brunchResumeCta { align-self: flex-start; text-decoration: none; }
 
 /* ── CTA BUTTON ─────────────────────────────────────────────────────── */
 .brunchModalCta {
@@ -509,11 +500,7 @@
   margin-bottom: 10px;
 }
 
-.brunchModalSkillPills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-}
+.brunchModalSkillPills { display: flex; flex-wrap: wrap; gap: 7px; }
 
 .brunchModalSkillPill {
   font-family: 'DM Mono', ui-monospace, monospace;
@@ -569,6 +556,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .brunchTableSpinner { transition: none; }
   .brunchDish, .brunchOverlay, .brunchModal { transition: none; }
 }
 
@@ -584,7 +572,7 @@
     width: 100%;
   }
 
-  .brunchTable {
+  .brunchTableSpinner {
     width: min(480px, 92vw);
     margin: 0 auto;
   }
