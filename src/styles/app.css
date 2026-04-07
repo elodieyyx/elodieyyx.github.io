@@ -1,0 +1,7 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import '../App.css';
+@import '../index.css';
+@import '../pages/Home/BrunchTableLanding.css';
+@import '../components/Projects/Projects.css';
+@import '../components/Projects/ImageCarousel.css';
+@import '../pages/Loading/Loading.css';

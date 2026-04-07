@@ -22,8 +22,9 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "craco start",
+    "build": "craco build",
+    "optimize:images": "node scripts/optimize-images.mjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -51,6 +52,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0"
+    "@craco/craco": "^7.1.0",
+    "gh-pages": "^6.3.0",
+    "sharp": "^0.34.5"
   }
 }

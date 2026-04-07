@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import './ImageCarousel.css';
-
 export default function ImageCarousel({ images, alt }) {
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
@@ -44,6 +42,7 @@ export default function ImageCarousel({ images, alt }) {
         src={images[lightboxIndex]}
         alt={`${alt} (${lightboxIndex + 1} of ${images.length})`}
         className="lightboxImg"
+        decoding="async"
         onClick={e => e.stopPropagation()}
       />
 
@@ -81,7 +80,13 @@ export default function ImageCarousel({ images, alt }) {
             onClick={() => setLightboxIndex(i)}
             aria-label={`View image ${i + 1} of ${images.length}`}
           >
-            <img src={src} alt={`${alt} ${i + 1}`} className="thumbImg" />
+            <img
+              src={src}
+              alt={`${alt} ${i + 1}`}
+              className="thumbImg"
+              loading="lazy"
+              decoding="async"
+            />
             <span className="thumbOverlay">⤢</span>
           </button>
         ))}

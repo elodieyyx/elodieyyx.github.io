@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Loading.css";
-
 export default function Loading({ onFinish }) {
     const [lettersVisible, setLettersVisible] = useState(0);
     const [exit, setExit] = useState(false);

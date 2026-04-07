@@ -2,11 +2,9 @@ import React from "react";
 // import ReactDOM from "react-dom";
 import {createRoot} from 'react-dom/client';
 import { HashRouter as Router } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './styles/app.css';
 import App from "./App";
 // import reportWebVitals from './reportWebVitals';
-import './index.css';
 
 // ReactDOM.render(
 //   <BrowserRouter>

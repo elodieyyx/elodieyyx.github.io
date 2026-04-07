@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './BrunchTableLanding.css';
-
 const SOCIAL_DATA = [
   { label: 'GitHub',   href: 'https://github.com/rollingchair63',      kind: 'external', icon: '🛠' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/elodieyyx',  kind: 'external', icon: '💬' },
@@ -41,7 +39,7 @@ export default function BrunchTableLanding() {
     {
       key: 'about', section: 'About Me', title: "Hello, I'm Elodie!",
       body: 'A computer science student from SMU who loves crafting meaningful digital experiences. I blend creativity with code to build things people enjoy using. ps. I REALLY REALLY LOVE DUMPLINGS 🥟.',
-      tags: [], imageSrc: '/img/food/dumplings.png', imageAlt: 'Dumplings', scrollTo: null,
+      tags: [], imageSrc: '/img/food/dumplings.webp', imageAlt: 'Dumplings', scrollTo: null,
     },
     {
       key: 'skills', section: 'Skills', title: 'What I bring to the table!',
@@ -52,23 +50,23 @@ export default function BrunchTableLanding() {
         { label: 'Libraries & Frameworks', items: ['React', 'Spring Boot', 'Node.js', 'Tailwind CSS'] },
         { label: 'Tools & Platforms',      items: ['GitHub', 'Figma', 'Expo'] },
       ],
-      imageSrc: '/img/food/takoyaki.png', imageAlt: 'Takoyaki', scrollTo: null,
+      imageSrc: '/img/food/takoyaki.webp', imageAlt: 'Takoyaki', scrollTo: null,
     },
     {
       key: 'links', section: 'Resume', title: "Here's my recipe!",
       body: 'All my experience, served on one page — download or view it fresh.',
-      tags: [], imageSrc: '/img/food/tiramisu.png', imageAlt: 'Tiramisu', scrollTo: null,
+      tags: [], imageSrc: '/img/food/tiramisu.webp', imageAlt: 'Tiramisu', scrollTo: null,
     },
     {
       key: 'projects', section: 'Projects', title: "Things I've cooked!",
       body: 'Projects built from hackathons or from a random lightbulb moment 💡 — a taste of what I can do!',
       tags: [],
-      imageSrc: '/img/food/matcha.png', imageAlt: 'Strawberry Matcha', scrollTo: 'projects',
+      imageSrc: '/img/food/matcha.webp', imageAlt: 'Strawberry Matcha', scrollTo: 'projects',
     },
     {
       key: 'socials', section: 'Socials', title: 'Send your compliments to the chef!',
       body: 'The chef accepts compliments, collabs, and critique. Drop by, say hi, leave a five-star review.',
-      tags: [], imageSrc: '/img/food/croissant.png', imageAlt: 'Croissant', scrollTo: null,
+      tags: [], imageSrc: '/img/food/croissant.webp', imageAlt: 'Croissant', scrollTo: null,
     },
   ], []);
 
@@ -195,6 +193,9 @@ export default function BrunchTableLanding() {
           <strong>Elodie Yeung</strong>
           Portfolio — 2026
         </div>
+        <div className="brunchHeaderHint" aria-hidden="true">
+          drag to spin · click to explore
+        </div>
       </header>
 
       <div className="brunchScene">
@@ -239,6 +240,7 @@ export default function BrunchTableLanding() {
                           className="brunchDishImg"
                           src={item.imageSrc}
                           alt={item.imageAlt || item.section}
+                          decoding="async"
                           style={{ transform: `rotate(${-tableAngle}deg)` }}
                         />
                       : <span className="brunchDishFallback" />}
@@ -254,11 +256,6 @@ export default function BrunchTableLanding() {
             </div>
           </div>
         </div>{/* end brunchTableSpinner */}
-
-        {/* Fixed hint label — sibling of spinner, anchored to brunchScene */}
-        <div className="brunchTableLabel" aria-hidden="true">
-          drag to spin · click to explore
-        </div>
 
       </div>{/* end brunchScene */}
 
@@ -284,7 +281,12 @@ export default function BrunchTableLanding() {
                   aria-label="Close"
                   title="Click to close"
                 >
-                  <img className="brunchModalImage" src={activeItem.imageSrc} alt={activeItem.imageAlt} />
+                  <img
+                    className="brunchModalImage"
+                    src={activeItem.imageSrc}
+                    alt={activeItem.imageAlt}
+                    decoding="async"
+                  />
                 </button>
               )}
 

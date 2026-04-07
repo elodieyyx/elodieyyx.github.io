@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ImageCarousel from './ImageCarousel';
-import "./Projects.css";
-
 const PROJECTS = [
   {
     id: '01',
@@ -56,9 +54,9 @@ const PROJECTS = [
     description: 'Built a full-stack app integrating NASA TEMPO APIs, ground sensors, and weather datasets into a unified pipeline with a geospatial dashboard.',
     year: '2025',
     images: [
-      '/img/project4-1.jpg',
-      '/img/project4-2.jpg',
-      '/img/project4-3.jpg',
+      '/img/project4-1.webp',
+      '/img/project4-2.webp',
+      '/img/project4-3.webp',
     ],
     stack: [
       { label: 'Frontend', pills: ['React'] },
@@ -100,11 +98,11 @@ const PROJECTS = [
     description: 'Designed a speech-to-text and image-to-text mockup for surgical research workflows.',
     year: '2025',
     images: [
-      '/img/project1-1.jpg',
-      '/img/project1-2.jpg',
-      '/img/project1-3.jpg',
-      '/img/project1-4.jpg',
-      '/img/project1-5.jpg',
+      '/img/project1-1.webp',
+      '/img/project1-2.webp',
+      '/img/project1-3.webp',
+      '/img/project1-4.webp',
+      '/img/project1-5.webp',
     ],
     stack: [
       { label: 'Frontend', pills: ['Figma', 'React', 'Tailwind CSS'] },
@@ -128,7 +126,7 @@ export default function Projects() {
         <div
           className="projectsMenuFrame"
           style={{
-            backgroundImage: `url(${process.env.PUBLIC_URL}/img/menu.jpg)`,
+            backgroundImage: `url(${process.env.PUBLIC_URL}/img/menu.webp)`,
             backgroundSize: '100% 100%',
             backgroundRepeat: 'no-repeat',
           }}
