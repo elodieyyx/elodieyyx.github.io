@@ -1,0 +1,15 @@
+{
+  "short_name": "Elodie",
+  "name": "Elodie's Portfolio",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#f5f0e8",
+  "background_color": "#f5f0e8"
+}
