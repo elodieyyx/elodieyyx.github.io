@@ -3,7 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .thumbBtn {
@@ -165,7 +165,12 @@
 
 /* ── RESPONSIVE ─────────────────────────────────────────────────────── */
 @media (max-width: 600px) {
-  .thumbBtn { width: 64px; height: 48px; }
+  .thumbStrip {
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .thumbBtn { width: 56px; height: 42px; }
   .lightboxBtn--prev { left: 12px; }
   .lightboxBtn--next { right: 12px; }
 }

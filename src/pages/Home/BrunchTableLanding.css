@@ -103,13 +103,72 @@ body.brunch-modal-open {
   width: 100%;
   min-height: 100vh;
   display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
   place-items: center;
-  padding: 80px 24px 60px;
+  padding: 80px 24px 26px;
+}
+
+/* ── SCROLL CUE ─────────────────────────────────────────────────────── */
+.brunchScrollCue {
+  position: relative;
+  z-index: 4;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--brunch-muted);
+  cursor: pointer;
+  display: inline-grid;
+  place-items: center;
+  gap: 6px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  padding: 10px 16px;
+  font-family: 'DM Mono', ui-monospace, monospace;
+  font-size: 8px;
+  letter-spacing: 0.24em;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.72;
+  transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  animation: brunchCueFloat 2.4s ease-in-out infinite;
+}
+
+.brunchScrollCue::before,
+.brunchScrollCue::after {
+  content: '';
+  width: 54px;
+  height: 1px;
+  background: rgba(196,149,106,0.42);
+}
+
+.brunchScrollCue:hover,
+.brunchScrollCue:focus-visible {
+  color: var(--brunch-ink);
+  opacity: 1;
+  transform: translateY(-2px);
+  outline: 0;
+}
+
+.brunchScrollCueArrow {
+  color: var(--brunch-accent);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.brunchRoot.isModalOpen .brunchScrollCue {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes brunchCueFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 5px; }
 }
 
 /* ── SPINNER WRAPPER (rotates the whole table) ──────────────────────── */
 .brunchTableSpinner {
-  width: min(820px, 86vmin);
+  width: min(820px, 78vmin, calc(100vh - 188px));
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   cursor: grab;
@@ -209,6 +268,17 @@ body.brunch-modal-open {
   z-index: 2;
 }
 
+.brunchDishContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  will-change: transform;
+  pointer-events: none;
+}
+
 .brunchDish:focus-visible {
   outline: 2px solid rgba(196,149,106,0.65);
   outline-offset: 6px;
@@ -233,7 +303,7 @@ body.brunch-modal-open {
 
 /* ── IMAGE ──────────────────────────────────────────────────────────── */
 .brunchDishArt {
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
   width: 100%;
   display: grid;
@@ -249,8 +319,7 @@ body.brunch-modal-open {
   user-select: none;
   -webkit-user-drag: none;
   filter: drop-shadow(0 10px 22px rgba(0,0,0,0.15));
-  will-change: transform;
-  /* counter-rotation applied via inline style */
+  pointer-events: auto;
 }
 
 .brunchDish--about   .brunchDishImg { width: 148%; height: 148%; }
@@ -264,6 +333,7 @@ body.brunch-modal-open {
   background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.2) 55%),
     linear-gradient(135deg, rgba(196,149,106,0.35), rgba(26,26,26,0.08));
   border: 1px solid rgba(0,0,0,0.06);
+  pointer-events: auto;
 }
 
 /* ── LABEL ──────────────────────────────────────────────────────────── */
@@ -278,6 +348,7 @@ body.brunch-modal-open {
   will-change: transform;
   /* counter-rotation applied via inline style */
   transition: color 0.2s ease;
+  pointer-events: auto;
 }
 
 .brunchDish:hover .brunchDishTag,
@@ -583,6 +654,7 @@ body.brunch-modal-open {
 @media (prefers-reduced-motion: reduce) {
   .brunchTableSpinner { transition: none; }
   .brunchDish, .brunchOverlay, .brunchModal { transition: none; }
+  .brunchScrollCue { animation: none; }
 }
 
 /* ── MOBILE ─────────────────────────────────────────────────────────── */
@@ -603,11 +675,24 @@ body.brunch-modal-open {
   }
 
   .brunchScene {
-    padding: 80px 0 60px;
-    display: flex;
+    padding: 80px 0 18px;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
     align-items: center;
     justify-content: center;
     width: 100%;
+  }
+
+  .brunchScrollCue {
+    bottom: 16px;
+    padding: 8px 10px;
+    font-size: 7px;
+    letter-spacing: 0.18em;
+  }
+
+  .brunchScrollCue::before,
+  .brunchScrollCue::after {
+    width: 34px;
   }
 
   .brunchTableSpinner {
@@ -616,8 +701,74 @@ body.brunch-modal-open {
   }
 
   .brunchDish {
-    width: clamp(90px, 19vw, 120px);
-    height: clamp(90px, 19vw, 120px);
+    width: clamp(90px, 23vw, 120px);
+    height: clamp(90px, 23vw, 120px);
+    overflow: visible;
+  }
+
+  .brunchDishContent {
+    gap: 4px;
+  }
+
+  .brunchDish:hover,
+  .brunchDish.isActive {
+    transform: translate(-50%, -50%) scale(1.04) !important;
+  }
+
+  .brunchDish--about    { left: 50%; top: 13%; }
+  .brunchDish--skills   { left: 85%; top: 36%; }
+  .brunchDish--links    { left: 72%; top: 78%; }
+  .brunchDish--projects { left: 28%; top: 78%; }
+  .brunchDish--socials  { left: 15%; top: 36%; }
+
+  .brunchDishImg {
+    width: 130%;
+    height: 130%;
+  }
+
+  .brunchDish--about .brunchDishImg,
+  .brunchDish--skills .brunchDishImg,
+  .brunchDish--projects .brunchDishImg,
+  .brunchDish--socials .brunchDishImg {
+    width: 148%;
+    height: 148%;
+  }
+
+  .brunchDishTag {
+    display: block;
+    flex: 0 0 auto;
+    position: static;
+    width: auto;
+    max-width: 92px;
+    font-size: 7px;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    text-align: center;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .brunchDish--about .brunchDishTag,
+  .brunchDish--links .brunchDishTag,
+  .brunchDish--socials .brunchDishTag {
+    margin-top: -5px;
+  }
+
+  .brunchCenterText {
+    width: 58%;
+  }
+
+  .brunchCenterText h1 {
+    font-size: clamp(20px, 6.4vw, 28px);
+    line-height: 1.1;
+  }
+
+  .brunchCenterText p {
+    margin-top: 12px;
+    font-size: clamp(6px, 1.6vw, 7px);
+    letter-spacing: 0.12em;
+    line-height: 1.35;
+    white-space: nowrap;
   }
 
   /* Modal */
@@ -651,5 +802,25 @@ body.brunch-modal-open {
 
   .brunchResumeFrame {
     height: 280px; /* was 360px — more compact */
+  }
+}
+
+@media (max-width: 380px) {
+  .brunchTableSpinner {
+    width: min(460px, 92vw);
+  }
+
+  .brunchDish {
+    width: clamp(82px, 22vw, 104px);
+    height: clamp(82px, 22vw, 104px);
+  }
+
+  .brunchCenterText {
+    width: 62%;
+  }
+
+  .brunchCenterText p {
+    font-size: 6px;
+    letter-spacing: 0.1em;
   }
 }

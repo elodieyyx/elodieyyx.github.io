@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import ImageCarousel from './ImageCarousel';
+
 const PROJECTS = [
   {
     id: '01',
@@ -54,7 +54,6 @@ const PROJECTS = [
     description: 'Built a full-stack app integrating NASA TEMPO APIs, ground sensors, and weather datasets into a unified pipeline with a geospatial dashboard.',
     year: '2025',
     images: [
-      '/img/project4-1.webp',
       '/img/project4-2.webp',
       '/img/project4-3.webp',
     ],
@@ -98,7 +97,6 @@ const PROJECTS = [
     description: 'Designed a speech-to-text and image-to-text mockup for surgical research workflows.',
     year: '2025',
     images: [
-      '/img/project1-1.webp',
       '/img/project1-2.webp',
       '/img/project1-3.webp',
       '/img/project1-4.webp',
@@ -114,14 +112,11 @@ const PROJECTS = [
 ];
 
 export default function Projects() {
-  const [expandedId, setExpandedId] = useState(null);
-  const toggle = (id) => setExpandedId(prev => prev === id ? null : id);
+  const [expandedId, setExpandedId] = useState('01');
+  const toggle = id => setExpandedId(prev => prev === id ? null : id);
 
   return (
-    <section
-      id="projects"
-      className="projectsSection"
-    >
+    <section id="projects" className="projectsSection">
       <div className="projectsInner">
         <div
           className="projectsMenuFrame"
@@ -142,56 +137,54 @@ export default function Projects() {
           </header>
 
           <div className="menuList">
-            {PROJECTS.map(project => {
-              const isOpen = expandedId === project.id;
-              return (
-                <article key={project.id} className={`menuItem${isOpen ? ' isOpen' : ''}`}>
-                  <button
-                    className="menuItemHeader"
-                    onClick={() => toggle(project.id)}
-                    aria-expanded={isOpen}
-                  >
-                    <span className="menuItemNumber">{project.id}</span>
-                    <span className="menuItemTitleGroup">
-                      {project.foodIcon && (
-                        <img src={project.foodIcon} alt="" className="menuItemIcon" aria-hidden="true" />
-                      )}
-                      <span className="menuItemTitle">{project.title}</span>
-                      {project.wip && <span className="menuItemWip">In progress</span>}
-                    </span>
-                    <span className="menuItemLeader" aria-hidden="true" />
-                    <span className="menuItemYear">{project.year}</span>
-                    <span className="menuItemChevron">{isOpen ? '−' : '+'}</span>
-                  </button>
+            {PROJECTS.map(project => (
+              <article
+                key={project.id}
+                className={`menuItem${project.images.length > 0 ? ' menuItem--withImages' : ''}${expandedId === project.id ? ' isOpen' : ''}`}
+              >
+                <button
+                  type="button"
+                  className="menuItemHeader"
+                  onClick={() => toggle(project.id)}
+                  aria-expanded={expandedId === project.id}
+                >
+                  <span className="menuItemNumber">{project.id}</span>
+                  <span className="menuItemTitleGroup">
+                    <span className="menuItemTitle">{project.title}</span>
+                    {project.wip && <span className="menuItemWip">In progress</span>}
+                  </span>
+                  <span className="menuItemLeader" aria-hidden="true" />
+                  <span className="menuItemYear">{project.year}</span>
+                  <span className="menuItemToggle" aria-hidden="true">
+                    {expandedId === project.id ? '−' : '+'}
+                  </span>
+                </button>
 
-                  <p className="menuItemSubtitle">{project.subtitle}</p>
+                <p className="menuItemSubtitle">{project.subtitle}</p>
 
-                  <div className={`menuItemBody${isOpen ? ' isVisible' : ''}`}>
-                    <p className="menuItemDesc">{project.description}</p>
-                    <div className="menuItemMeta">
-                      <div className="menuItemStack">
-                        {project.stack.map(row => (
-                          <div key={row.label} className="menuItemStackRow">
-                            <span className="menuItemStackLabel">{row.label}</span>
-                            {row.pills.map(p => (
-                              <span key={p} className="menuItemPill">{p}</span>
-                            ))}
-                          </div>
-                        ))}
+                <div className={`menuItemDescWrap${expandedId === project.id ? ' isVisible' : ''}`}>
+                  <p className="menuItemDesc">{project.description}</p>
+                </div>
+
+                <div className="menuItemBody">
+                  <div className="menuItemStack">
+                    {project.stack.map(row => (
+                      <div key={row.label} className="menuItemStackRow">
+                        <span className="menuItemStackLabel">{row.label}</span>
+                        <span className="menuItemPills">
+                          {row.pills.map(p => (
+                            <span key={p} className="menuItemPill">{p}</span>
+                          ))}
+                        </span>
                       </div>
-                      {project.link && (
-                        project.link.kind === 'route'
-                          ? <Link to={project.link.href} className="menuItemLink">{project.link.label} →</Link>
-                          : <a href={project.link.href} target="_blank" rel="noopener noreferrer" className="menuItemLink">{project.link.label} →</a>
-                      )}
-                    </div>
-                    {project.images.length > 0 && (
-                      <ImageCarousel images={project.images} alt={project.title} />
-                    )}
+                    ))}
                   </div>
-                </article>
-              );
-            })}
+                  {project.images.length > 0 && (
+                    <ImageCarousel images={project.images} alt={project.title} />
+                  )}
+                </div>
+              </article>
+            ))}
           </div>
 
           <div className="projectsFooter">more dishes coming soon</div>

@@ -110,8 +110,9 @@ export default function BrunchTableLanding() {
   // ── Drag handlers — attached to the spinner wrapper ─────────────────
   const onPointerDown = useCallback(e => {
     if (activeKey) return;
-    // If the pointer went down on or inside a dish button, don't start a drag
-    if (e.target.closest('.brunchDish')) return;
+    // If the pointer went down on actual dish content, don't start a drag.
+    // Empty space inside the dish hitbox should still spin the table.
+    if (e.target.closest('.brunchDishImg, .brunchDishTag, .brunchDishFallback')) return;
     isDragging.current = true;
     hasMoved.current   = false;
     lastAngle.current  = getPointerAngle(e);
@@ -260,36 +261,57 @@ export default function BrunchTableLanding() {
                   type="button"
                   className={`brunchDish brunchDish--${item.key}${activeKey === item.key ? ' isActive' : ''}`}
                   // Stop pointerdown here so the spinner's onPointerDown never fires
-                  // for dish button presses, keeping setPointerCapture away from them
-                  onPointerDown={e => e.stopPropagation()}
-                  onClick={() => handleDishClick(item)}
+                  // for actual food/title presses, while empty hitbox space can still spin
+                  onPointerDown={e => {
+                    if (e.target.closest('.brunchDishImg, .brunchDishTag, .brunchDishFallback')) {
+                      e.stopPropagation();
+                    }
+                  }}
+                  onClick={e => {
+                    if (hasMoved.current) return;
+                    if (!e.target.closest('.brunchDishImg, .brunchDishTag, .brunchDishFallback')) return;
+                    handleDishClick(item);
+                  }}
                   onPointerEnter={() => setCursorHover(true)}
                   onPointerLeave={() => setCursorHover(false)}
                   aria-label={`${item.section}: ${item.title}`}
                   aria-pressed={activeKey === item.key}
                 >
-                  <span className="brunchDishArt" aria-hidden="true">
-                    {item.imageSrc
-                      ? <img
-                          className="brunchDishImg"
-                          src={item.imageSrc}
-                          alt={item.imageAlt || item.section}
-                          decoding="async"
-                          style={{ transform: `rotate(${-tableAngle}deg)` }}
-                        />
-                      : <span className="brunchDishFallback" />}
-                  </span>
                   <span
-                    className="brunchDishTag"
+                    className="brunchDishContent"
                     style={{ transform: `rotate(${-tableAngle}deg)` }}
                   >
-                    {item.section}
+                    <span className="brunchDishArt" aria-hidden="true">
+                      {item.imageSrc
+                        ? <img
+                            className="brunchDishImg"
+                            src={item.imageSrc}
+                            alt={item.imageAlt || item.section}
+                            decoding="async"
+                          />
+                        : <span className="brunchDishFallback" />}
+                    </span>
+                    <span className="brunchDishTag">
+                      {item.section}
+                    </span>
                   </span>
                 </button>
               ))}
             </div>
           </div>
         </div>{/* end brunchTableSpinner */}
+
+        <button
+          type="button"
+          className="brunchScrollCue"
+          onClick={() => handleScrollCta('projects')}
+          onPointerEnter={() => setCursorHover(true)}
+          onPointerLeave={() => setCursorHover(false)}
+          aria-label="Scroll to projects"
+        >
+          <span>today&apos;s specials below</span>
+          <span aria-hidden="true" className="brunchScrollCueArrow">↓</span>
+        </button>
 
       </div>{/* end brunchScene */}
 

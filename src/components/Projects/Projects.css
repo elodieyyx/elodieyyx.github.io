@@ -1,8 +1,8 @@
 /* ── PROJECTS — Printed Menu Aesthetic ──────────────────────────────── */
 .projectsSection {
   position: relative;
-  padding: 120px 16px 80px;
-  margin-top: -80px;
+  padding: 40px 16px 56px;
+  margin-top: -40px;
   background: transparent;
 }
 
@@ -11,7 +11,6 @@
 }
 
 .projectsInner {
-  transform: scale(1.02);
   max-width: 950px;
   margin: 0 auto;
   position: relative;
@@ -23,13 +22,14 @@
 .projectsMenuFrame {
   position: relative;
   padding: 48px 80px 72px;
+  overflow: hidden;
 }
 
 /* ── HEADER ─────────────────────────────────────────────────────────── */
 .projectsHeader {
   text-align: center;
-  margin-bottom: 30px;
-  margin-top: 30px;
+  margin: 30px auto 30px;
+  max-width: 760px;
 }
 
 .projectsEyebrow {
@@ -73,17 +73,20 @@
 
 .projectsSubtitle {
   font-family: 'Cormorant Garamond', ui-serif, serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 300;
   font-style: italic;
   color: #8a8070;
   letter-spacing: 0.04em;
+  margin: 0;
 }
 
 /* ── MENU LIST ──────────────────────────────────────────────────────── */
 .menuList {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  gap: 0;
+  max-width: none;
+  margin: 0 auto;
 }
 
 .menuItem + .menuItem {
@@ -97,7 +100,8 @@
 /* ── ITEM HEADER (clickable row) ────────────────────────────────────── */
 .menuItemHeader {
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, auto) minmax(24px, 1fr) auto auto;
   align-items: baseline;
   gap: 12px;
   appearance: none;
@@ -106,6 +110,7 @@
   padding: 0;
   cursor: pointer;
   text-align: left;
+  font: inherit;
 }
 
 .menuItemNumber {
@@ -118,16 +123,10 @@
 
 .menuItemTitleGroup {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
+  min-width: 0;
   flex-shrink: 0;
-}
-
-.menuItemIcon {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.12));
 }
 
 .menuItemTitle {
@@ -137,6 +136,7 @@
   color: #1a1a1a;
   line-height: 1.2;
   transition: color 0.2s ease;
+  overflow-wrap: anywhere;
 }
 
 .menuItem:hover .menuItemTitle,
@@ -175,15 +175,13 @@
   flex-shrink: 0;
 }
 
-.menuItemChevron {
-  font-family: 'DM Mono', ui-monospace, monospace;
-  font-size: 16px;
-  color: #c4956a;
-  flex-shrink: 0;
-  width: 20px;
+.menuItemToggle {
+  width: 16px;
   text-align: center;
-  transition: transform 0.3s ease;
+  font-family: 'DM Mono', ui-monospace, monospace;
+  font-size: 15px;
   line-height: 1;
+  color: #c4956a;
 }
 
 /* ── SUBTITLE ───────────────────────────────────────────────────────── */
@@ -197,53 +195,62 @@
   padding-left: 36px;
 }
 
-/* ── EXPANDABLE BODY ────────────────────────────────────────────────── */
-.menuItemBody {
+.menuItemDescWrap {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   padding-left: 36px;
+  transition: grid-template-rows 0.34s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.menuItemBody.isVisible {
+.menuItemDescWrap.isVisible {
   grid-template-rows: 1fr;
 }
 
-.menuItemBody > * {
-  overflow: hidden;
-}
-
 .menuItemDesc {
+  min-height: 0;
+  overflow: hidden;
   font-family: 'Cormorant Garamond', ui-serif, serif;
   font-size: 16px;
   font-weight: 300;
-  line-height: 1.75;
+  line-height: 1.65;
   color: #555;
-  margin: 16px 0 18px;
-  max-width: 600px;
+  margin: 16px 0 14px;
+  max-width: 620px;
 }
 
-.menuItemMeta {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
+.menuItemBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px 24px;
+  padding-left: 36px;
+  margin-top: 14px;
+}
+
+.menuItem--withImages .menuItemBody {
+  grid-template-columns: minmax(0, 1fr) minmax(176px, 240px);
+  align-items: start;
 }
 
 .menuItemStack {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 
 .menuItemStackRow {
-  display: flex;
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
   align-items: center;
+  gap: 8px;
+}
+
+.menuItemPills {
+  display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
 }
 
 .menuItemStackLabel {
@@ -252,7 +259,7 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #8a8070;
-  min-width: 62px;
+  min-width: 0;
 }
 
 .menuItemPill {
@@ -264,28 +271,14 @@
   border: 1px solid rgba(196,149,106,0.25);
   border-radius: 100px;
   padding: 3px 10px;
+  display: inline-flex;
+  width: fit-content;
 }
-
-.menuItemLink {
-  font-family: 'DM Mono', ui-monospace, monospace;
-  font-size: 8px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #1a1a1a;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(196,149,106,0.4);
-  padding-bottom: 2px;
-  transition: color 0.2s, border-color 0.2s;
-  white-space: nowrap;
-  align-self: flex-start;
-  margin-top: 4px;
-}
-.menuItemLink:hover { color: #c4956a; border-color: #c4956a; }
 
 /* ── FOOTER ─────────────────────────────────────────────────────────── */
 .projectsFooter {
   text-align: center;
-  margin-top: 64px;
+  margin-top: 42px;
   font-family: 'DM Mono', ui-monospace, monospace;
   font-size: 8px;
   letter-spacing: 0.3em;
@@ -309,8 +302,8 @@
 /* ── MOBILE ONLY: clean card layout, no decorative frame ─────────────────── */
 @media (max-width: 768px) {
   .projectsSection {
-    padding: 96px 16px 60px;
-    margin-top: -56px;
+    padding: 24px 16px 44px;
+    margin-top: -28px;
     background: transparent;
   }
 
@@ -328,18 +321,24 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
   }
 
-  /* Header — keep the title, drop the rules since no frame */
+  .projectsHeader {
+    margin: 0 0 30px;
+  }
+
   .projectsEyebrow {
     font-size: 7px;
+    letter-spacing: 0.28em;
     margin-bottom: 16px;
   }
 
   .projectsTitleRow {
     gap: 12px;
+    margin-bottom: 10px;
   }
 
   .projectsTitleRule {
-    max-width: 32px;
+    display: block;
+    max-width: 34px;
   }
 
   .projectsTitle {
@@ -361,7 +360,9 @@
   }
 
   .menuItemHeader {
+    grid-template-columns: auto minmax(0, 1fr) minmax(16px, 1fr) auto auto;
     gap: 8px;
+    align-items: baseline;
   }
 
   .menuItemNumber {
@@ -370,21 +371,35 @@
 
   .menuItemTitle {
     font-size: clamp(15px, 4vw, 20px);
+    line-height: 1.15;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .menuItemTitleGroup {
+    min-width: 0;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    gap: 6px;
   }
 
   .menuItemYear {
+    display: inline;
     font-size: 8px;
+    letter-spacing: 0.08em;
   }
 
-  .menuItemChevron {
+  .menuItemToggle {
     font-size: 14px;
+    width: 14px;
   }
 
   .menuItemWip {
-    display: none; /* avoid overflow on small screens */
+    display: none;
   }
 
   .menuItemLeader {
+    display: block;
     min-width: 8px;
   }
 
@@ -392,19 +407,40 @@
     font-size: 14px;
     padding-left: 0;
     margin-top: 4px;
+    overflow-wrap: anywhere;
   }
 
-  .menuItemBody {
+  .menuItemDescWrap {
     padding-left: 0;
   }
 
   .menuItemDesc {
     font-size: 14px;
     line-height: 1.65;
+    margin: 16px 0 16px;
+  }
+
+  .menuItemBody {
+    grid-template-columns: 1fr;
+    gap: 9px;
+    padding-left: 0;
+    margin-top: 18px;
+  }
+
+  .menuItem--withImages .menuItemBody {
+    grid-template-columns: 1fr;
+  }
+
+  .menuItemStack {
+    gap: 5px;
+  }
+
+  .menuItemStackRow {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 7px;
   }
 
   .menuItemStackLabel {
-    min-width: 56px;
     font-size: 6px;
   }
 
@@ -414,7 +450,7 @@
   }
 
   .projectsFooter {
-    margin-top: 40px;
+    margin-top: 28px;
     font-size: 7px;
   }
 
@@ -422,31 +458,4 @@
   .projectsFooter::after {
     width: 36px;
   }
-}
-/* ── FEATURED (Tariff Calculator) ─────────────────────────── */
-.menuItem.isFeatured {
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  background: rgba(212, 175, 55, 0.05);
-  padding: 28px 16px;
-  margin: 0 -16px;
-  border-radius: 8px;
-}
-
-/* subtle glow on hover */
-.menuItem.isFeatured:hover {
-  box-shadow: 0 6px 24px rgba(212, 175, 55, 0.18);
-}
-
-/* ── CHEF BADGE ───────────────────────────────────────────── */
-.chefBadge {
-  margin-left: 10px;
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: #d4af37;
-  color: #1a1a1a;
-  font-weight: 600;
-  vertical-align: middle;
 }
