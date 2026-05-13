@@ -27,6 +27,7 @@ export default function BrunchTableLanding() {
   const lastTime     = useRef(0);
   const rafRef       = useRef(null);
   const tableRef     = useRef(null);
+  const scrollLockY  = useRef(0);
   const [tableAngle, setTableAngle] = useState(0);
 
   // ── UI state ────────────────────────────────────────────────────────
@@ -157,6 +158,35 @@ export default function BrunchTableLanding() {
   }, [activeKey]);
 
   useEffect(() => {
+    const body = document.body;
+    const html = document.documentElement;
+
+    if (!activeKey) {
+      return undefined;
+    }
+
+    scrollLockY.current = window.scrollY;
+    body.classList.add('brunch-modal-open');
+    html.classList.add('brunch-modal-open');
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollLockY.current}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
+
+    return () => {
+      body.classList.remove('brunch-modal-open');
+      html.classList.remove('brunch-modal-open');
+      body.style.position = '';
+      body.style.top = '';
+      body.style.left = '';
+      body.style.right = '';
+      body.style.width = '';
+      window.scrollTo(0, scrollLockY.current);
+    };
+  }, [activeKey]);
+
+  useEffect(() => {
     const onKey = e => { if (e.key === 'Escape') setActiveKey(null); };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -183,7 +213,11 @@ export default function BrunchTableLanding() {
   }, [navigate]);
 
   return (
-    <section className="brunchRoot" ref={rootRef} aria-label="Brunch table landing">
+    <section
+      className={`brunchRoot${activeKey ? ' isModalOpen' : ''}`}
+      ref={rootRef}
+      aria-label="Brunch table landing"
+    >
       <div className="brunchCursor"     aria-hidden="true" style={{ left: cursorPos.x, top: cursorPos.y }} />
       <div className="brunchCursorRing" aria-hidden="true"
         style={{ left: ringPos.x, top: ringPos.y, '--ringScale': cursorHover ? 1.6 : 1 }} />

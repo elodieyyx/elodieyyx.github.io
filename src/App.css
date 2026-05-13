@@ -36,7 +36,7 @@ body {
 
 body.home-brunch {
   padding-top: 0;
-  background-color: #f5f0e8; /* match brunch landing */
+  background-color: var(--brunch-bg, #f5f0e8);
   color: #1a1a1a;
 }
 

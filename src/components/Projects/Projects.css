@@ -1,8 +1,13 @@
 /* ── PROJECTS — Printed Menu Aesthetic ──────────────────────────────── */
 .projectsSection {
   position: relative;
-  padding: 40px 16px 80px;
-  background: #f5f0e8;
+  padding: 120px 16px 80px;
+  margin-top: -80px;
+  background: transparent;
+}
+
+.projectsSection::before {
+  content: none;
 }
 
 .projectsInner {
@@ -304,8 +309,9 @@
 /* ── MOBILE ONLY: clean card layout, no decorative frame ─────────────────── */
 @media (max-width: 768px) {
   .projectsSection {
-    padding: 40px 16px 60px;
-    background: #f5f0e8;
+    padding: 96px 16px 60px;
+    margin-top: -56px;
+    background: transparent;
   }
 
   .projectsInner {

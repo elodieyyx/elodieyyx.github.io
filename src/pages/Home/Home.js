@@ -23,9 +23,9 @@ export default function Home() {
     }, []);
 
     return (
-        <>
+        <main className="homeSurface">
             <BrunchTableLanding />
             <Projects />
-        </>
+        </main>
     );
 }
