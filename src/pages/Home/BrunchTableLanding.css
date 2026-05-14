@@ -682,7 +682,7 @@ body.brunch-modal-open {
     align-items: start;
     justify-content: center;
     width: 100%;
-    row-gap: 10px;
+    row-gap: 18px;
   }
 
   .brunchScrollCue {

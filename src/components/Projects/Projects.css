@@ -302,8 +302,8 @@
 /* ── MOBILE ONLY: clean card layout, no decorative frame ─────────────────── */
 @media (max-width: 768px) {
   .projectsSection {
-    padding: 24px 16px 44px;
-    margin-top: -28px;
+    padding: 8px 16px 44px;
+    margin-top: -128px;
     background: transparent;
   }
 
