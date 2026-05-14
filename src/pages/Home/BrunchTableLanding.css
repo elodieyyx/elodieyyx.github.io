@@ -675,19 +675,21 @@ body.brunch-modal-open {
   }
 
   .brunchScene {
-    padding: 80px 0 18px;
+    padding: clamp(118px, 18vh, 152px) 0 max(14px, env(safe-area-inset-bottom));
     display: grid;
-    grid-template-rows: minmax(0, 1fr) auto;
-    align-items: center;
+    grid-template-rows: auto auto;
+    align-content: start;
+    align-items: start;
     justify-content: center;
     width: 100%;
+    row-gap: 10px;
   }
 
   .brunchScrollCue {
-    bottom: 16px;
     padding: 8px 10px;
     font-size: 7px;
     letter-spacing: 0.18em;
+    margin-top: 0;
   }
 
   .brunchScrollCue::before,

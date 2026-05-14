@@ -9,14 +9,10 @@ function App() {
   return (
     <>
       {loading && <Loading onFinish={() => setLoading(false)} />}
-      {!loading && (
-        <>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Navigate to="/" replace />} />
-          </Routes>
-        </>
-      )}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
+      </Routes>
     </>
   );
 }
